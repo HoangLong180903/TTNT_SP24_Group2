@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,42 +8,45 @@ import {
   TouchableOpacity,
   Alert
 } from "react-native";
+import { useContext } from 'react';
 import { useNavigation } from "@react-navigation/native";
-import CheckBox from "@react-native-community/checkbox";
-import React, { useEffect, useState } from "react";
+import { useAuth } from "../configs/authContext";
+import { API_LOGIN } from '../configs/api-config';
 
 export default function SignIn() {
   const navigation = useNavigation();
+  const { setUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const login = async (email, password) => {
     try {
-      const response = await fetch("http://172.20.10.2:6002/api/login", {
+      const response = await fetch(`${API_LOGIN}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ email: email, password: password }),
-        // body: JSON.parse(JSON.stringify({ email: email, password: password }))
       });
 
       const data = await response.json();
       console.log(data)
       if (response.ok) {
+        setUser(data.user);
         navigation.navigate("Màn Hình Chính");
       } else {
-       Alert.alert("Thông báo!", "Tài khoản hoặc Mật khẩu không đúng", [
-         {
-           text: "OK",
-         },
-       ]);
-      // navigation.navigate("Màn Hình Chính");
+        Alert.alert("Thông báo!", "Tài khoản hoặc Mật khẩu không đúng", [
+          {
+            text: "OK",
+          },
+        ]);
       }
     } catch (error) {
       console.error(error);
     }
   };
+
   return (
     <View style={styles.container}>
       <Image
