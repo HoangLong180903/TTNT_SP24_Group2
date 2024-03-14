@@ -8,6 +8,7 @@ const Stack = createNativeStackNavigator();
 import ManHinhDangNhap from "./views/SignIn";
 import ManHinhDangKy from "./views/SignUp";
 import ManHinhHome from "./views/MainContainer";
+import GameDetail from "./views/GameDetail";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
         {ManHinhDangNhap}/>
         <Stack.Screen name='Màn Hình Đăng Ký' component={ManHinhDangKy}/>
         <Stack.Screen name='Màn Hình Chính' component={ManHinhHome}/>
+        <Stack.Screen name="GameDetail" component={GameDetail} />
 
       </Stack.Navigator>
       </AuthProvider>

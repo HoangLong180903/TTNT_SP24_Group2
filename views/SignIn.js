@@ -15,7 +15,7 @@ import { API_LOGIN } from '../configs/api-config';
 
 export default function SignIn() {
   const navigation = useNavigation();
-  const { setUser } = useAuth();
+  const { setUser } = useAuth(); 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,6 +33,7 @@ export default function SignIn() {
       const data = await response.json();
       console.log(data)
       if (response.ok) {
+        // Set thông tin user vào context
         setUser(data.user);
         navigation.navigate("Màn Hình Chính");
       } else {

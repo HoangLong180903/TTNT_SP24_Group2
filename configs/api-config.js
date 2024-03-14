@@ -6,3 +6,6 @@ export const API_LOGIN= `http://${IP_ADDRESS}:6002/api/login`;
 
 // api test
 export const API_LIST_QUIZZ= `http://${IP_ADDRESS}:6002/api/quizz/testsByName`;
+
+export const API_QUIZZ_DETAIL= `http://${IP_ADDRESS}:6002/api/quizz/test`;
+

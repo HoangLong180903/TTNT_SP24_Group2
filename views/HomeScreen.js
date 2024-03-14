@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View, Image, FlatList } from "react-native";
+import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from "react-native";
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useAuth } from "../configs/authContext"; 
 import { API_LIST_QUIZZ } from "../configs/api-config";
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
   const [data, setData] = useState([]);
+  const navigation = useNavigation();
   const { user } = useAuth();
 
   useEffect(() => {
@@ -25,12 +27,17 @@ export default function HomeScreen() {
   };
 
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
+    <TouchableOpacity style={styles.itemContainer} onPress={() => navigateToDetail(item._id)}> 
       <Image source={{ uri: item.image }} style={styles.image} />
       <Text style={styles.textTitle}>{item.name}</Text>
       <Text style={styles.textQuestion}>{item.questions.length} câu hỏi</Text>
-    </View>
+    </TouchableOpacity>
   );
+  
+
+  const navigateToDetail = (quizId) => { 
+    navigation.navigate('GameDetail', { testId: quizId }); 
+  };
 
   return (
     <View style={styles.container}>
