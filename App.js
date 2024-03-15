@@ -10,6 +10,7 @@ import ManHinhDangKy from "./views/SignUp";
 import ManHinhHome from "./views/MainContainer";
 import GameDetail from "./views/GameDetail";
 import StartQuizz from "./views/StartQuizz";
+import ResultQuizz from "./views/resultQuizz";
 
 export default function App() {
   return (
@@ -22,8 +23,7 @@ export default function App() {
         <Stack.Screen name='Màn Hình Chính' component={ManHinhHome}/>
         <Stack.Screen name="GameDetail" component={GameDetail} />
         <Stack.Screen name="StartQuizz" component={StartQuizz} />
-
-
+        <Stack.Screen name="ResultQuizz" component={ResultQuizz} />
       </Stack.Navigator>
       </AuthProvider>
     </NavigationContainer>

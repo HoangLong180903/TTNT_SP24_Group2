@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { API_TAKE_QUIZZ } from '../configs/api-config';
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
 const StartQuizz = ({ navigation, route }) => {
@@ -51,7 +52,12 @@ const StartQuizz = ({ navigation, route }) => {
                     const { correctAnswersCount, incorrectAnswersCount, score } = response.data.session;
                     alert(`Correct answers: ${correctAnswersCount}\nIncorrect answers: ${incorrectAnswersCount}\nScore: ${score}`);
                     setScore(score);
-                    navigation.goBack();
+                    const questionsWithAnswers = testDetail.questions.map(question => ({
+                        ...question,
+                        userAnswer: selectedAnswers[testDetail.questions.indexOf(question)],
+                        allAnswers: question.answers.map(ans => ans.answer) // Add all answers to the question object
+                    }));
+                    navigation.navigate('ResultQuizz', { correctAnswersCount, incorrectAnswersCount, score, questions: questionsWithAnswers });
                 })
                 .catch(error => {
                     console.error('Error submitting answer:', error);
