@@ -19,7 +19,7 @@ export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const login = async (email, password) => {
+  const login = async () => {
     try {
       const response = await fetch(`${API_LOGIN}`, {
         method: "POST",
@@ -27,13 +27,12 @@ export default function SignIn() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email: email, password: password }),
+        body: JSON.stringify({ email, password }), 
       });
-
+  
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       if (response.ok) {
-        // Set thông tin user vào context
         setUser(data.user);
         navigation.navigate("Màn Hình Chính");
       } else {
@@ -47,6 +46,7 @@ export default function SignIn() {
       console.error(error);
     }
   };
+  
 
   return (
     <View style={styles.container}>

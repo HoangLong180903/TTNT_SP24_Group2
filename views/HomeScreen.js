@@ -38,6 +38,7 @@ export default function HomeScreen() {
   const navigateToDetail = (quizId) => { 
     navigation.navigate('GameDetail', { testId: quizId }); 
   };
+  
 
   return (
     <View style={styles.container}>

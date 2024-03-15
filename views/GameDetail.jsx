@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { API_QUIZZ_DETAIL } from '../configs/api-config';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useAuth } from '../configs/authContext';
 
 export default function GameDetail({ route, navigation }) {
   const [quizDetail, setQuizDetail] = useState(null);
+  const { user } = useAuth();
+  const [userId, setUserId] = useState(null); 
+  const [userDataLoaded, setUserDataLoaded] = useState(false); 
+
+  useEffect(() => {
+    setUserId(user ? user._id : null); 
+    if (user) {
+      setUserDataLoaded(true); 
+    }
+  }, [user]);
 
   useEffect(() => {
     const { testId } = route.params;
@@ -16,17 +27,30 @@ export default function GameDetail({ route, navigation }) {
     try {
       const response = await axios.get(`${API_QUIZZ_DETAIL}/${testId}`);
       setQuizDetail(response.data);
-      console.log(response.data);
+      console.log("Data question: ", response.data)
     } catch (error) {
       console.error('Error fetching quiz detail:', error);
     }
   };
 
   const handleGoBack = () => {
-    navigation.goBack(); // Quay lại trang trước đó khi button được nhấn
+    navigation.goBack();
+  };
+
+  const handleStartQuiz = () => {
+    if (userId && quizDetail && quizDetail.questions && quizDetail.questions.length > 0) {
+      console.log("Navigating to StartQuizz with userId:", userId, "and quizDetail:", quizDetail);
+      navigation.navigate('StartQuizz', { userId: userId, quizDetail: quizDetail });
+    } else {
+      console.log("User is not logged in or quizDetail is not available or no questions found");
+    }
   };
   
-  if (!quizDetail) {
+  
+  // Log dữ liệu user để kiểm tra
+  console.log("User data:", user);
+
+  if (!quizDetail || !userDataLoaded) {
     return (
       <View style={styles.container}>
         <Text>Loading...</Text>
@@ -44,12 +68,11 @@ export default function GameDetail({ route, navigation }) {
       </View>
       <Text style={styles.textTitle}>{quizDetail.name}</Text>
       <Text style={styles.text}>{quizDetail.description}</Text>
-      <Text style={styles.text}>Number of Questions: {quizDetail.questions.length}</Text>
+      <Text style={styles.text}>Number of Questions: {quizDetail && quizDetail.questions ? quizDetail.questions.length : 'N/A'}</Text>
 
-      <TouchableOpacity style={styles.startButton} >
+      <TouchableOpacity style={styles.startButton} onPress={handleStartQuiz}>
         <Text style={styles.startButtonText}>Start</Text>
       </TouchableOpacity>
-
     </View>
   );
 }
@@ -61,7 +84,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     alignItems: 'center',
-    marginBottom: 10, 
+    marginBottom: 10,
   },
   image: {
     width: '100%',
@@ -82,7 +105,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 40,
     left: 10,
-    zIndex: 1, 
+    zIndex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
     borderRadius: 20,
     padding: 10,
