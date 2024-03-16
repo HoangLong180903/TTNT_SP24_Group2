@@ -14,6 +14,7 @@ import StartQuizz from "./views/StartQuizz";
 import ResultQuizz from "./views/ResultQuizz";
 import HomeScreen from "./views/HomeScreen";
 import QuizScreen from "./views/QuizScreen";
+import RankScreen from "./views/RankScreen";
 
 export default function App() {
   return (
@@ -30,6 +31,8 @@ export default function App() {
             <Stack.Screen name="ResultQuizz" component={ResultQuizz} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="QuizScreen" component={QuizScreen} />
+            <Stack.Screen name="RankScreen" component={RankScreen} />
+
 
 
           </Stack.Navigator>

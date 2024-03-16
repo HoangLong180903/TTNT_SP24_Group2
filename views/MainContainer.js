@@ -12,7 +12,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "./HomeScreen";
 import QuizScreen from "./QuizScreen"
-import DiemThuongScreen from "./DiemThuongScreen";
+import RankScreen from "./RankScreen";
 import InfoUserScreen from "./InfoUserScreen";
 const Tab = createBottomTabNavigator();
 export default function Home() {
@@ -44,9 +44,9 @@ export default function Home() {
       />
       <Tab.Screen
         name="Rank & Điểm Thưởng"
-        component={DiemThuongScreen}
+        component={RankScreen}
         options={{
-          tabBarLabel: 'Rank Coin',
+          tabBarLabel: 'Rank',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="wallet-giftcard" color={color} size={26} />
           ),

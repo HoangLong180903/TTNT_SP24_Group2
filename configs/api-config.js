@@ -19,4 +19,5 @@ export const API_HISTORY_TAKE_QUIZ_BY_UID= `http://${IP_ADDRESS}:6002/api/quizz/
 export const API_TOTAL_COIN_BY_UID= `http://${IP_ADDRESS}:6002/api/score`;
 
 
-
+// API RANK
+export const API_RANK_LIST= `http://${IP_ADDRESS}:6002/api/rank/weekly`;
