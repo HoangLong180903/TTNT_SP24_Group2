@@ -15,7 +15,7 @@ import { API_LOGIN } from '../configs/api-config';
 
 export default function SignIn() {
   const navigation = useNavigation();
-  const { setUser } = useAuth(); 
+  const { setUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,9 +27,9 @@ export default function SignIn() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }), 
+        body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await response.json();
       console.log(data);
       if (response.ok) {
@@ -46,7 +46,7 @@ export default function SignIn() {
       console.error(error);
     }
   };
-  
+
 
   return (
     <View style={styles.container}>
@@ -94,10 +94,11 @@ export default function SignIn() {
         }}
         placeholder="Password"
         onChangeText={(txt) => {
-          // setUsername(txt);
           setPassword(txt);
         }}
+        secureTextEntry={true}
       />
+
       <TouchableOpacity
         style={{
           width: 360,
@@ -109,11 +110,11 @@ export default function SignIn() {
         }}
         // onPress={() => {
         //   navigation.navigate("Màn Hình Chính");
-          
+
         // }}
         onPress={() => {
-            login(email,password);
-          }}
+          login(email, password);
+        }}
       >
         <Text style={{ alignSelf: "center", fontSize: 22, color: "#FFF" }}>
           Sign In
@@ -142,7 +143,7 @@ export default function SignIn() {
           onPress={() => {
             navigation.navigate('Màn Hình Đăng Ký')
           }}
-      
+
         >
           <Text style={{ fontSize: 18, color: "#F46535", textAlign: "center" }}>
             Create a new account.
