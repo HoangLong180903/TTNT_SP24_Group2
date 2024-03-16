@@ -1,17 +1,20 @@
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from "react-native";
-import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useAuth } from "../configs/authContext"; 
-import { API_LIST_QUIZZ } from "../configs/api-config";
+import { API_LIST_QUIZZ, API_TOTAL_COIN_BY_UID } from "../configs/api-config"; 
 import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
   const [data, setData] = useState([]);
+  const [totalCoin, setTotalCoin] = useState(0); 
   const navigation = useNavigation();
   const { user } = useAuth();
+  // console.log("Data user: ", user)
 
   useEffect(() => {
     fetchData();
+    fetchTotalCoin(); 
   }, []);
 
   const fetchData = async () => {
@@ -20,12 +23,34 @@ export default function HomeScreen() {
         `${API_LIST_QUIZZ}`
       );
       setData(response.data);
-      // console.log(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
+  const fetchTotalCoin = async () => {
+    try {
+      // console.log("Fetching total coin for userId:", user._id); 
+  
+      if (user && user._id) {
+        const response = await axios.get(
+          `${API_TOTAL_COIN_BY_UID}/${user._id}`
+        );
+        setTotalCoin(response.data.totalScore);
+      }
+    } catch (error) {
+      console.error("Error fetching total coin:", error);
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('focus', () => {
+      fetchTotalCoin();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+  
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.itemContainer} onPress={() => navigateToDetail(item._id)}> 
       <Image source={{ uri: item.image }} style={styles.image} />
@@ -33,16 +58,15 @@ export default function HomeScreen() {
       <Text style={styles.textQuestion}>{item.questions.length} câu hỏi</Text>
     </TouchableOpacity>
   );
-  
 
   const navigateToDetail = (quizId) => { 
-    navigation.navigate('GameDetail', { testId: quizId }); 
+    navigation.navigate('GameDetail', { testId: quizId });
   };
+  
   
 
   return (
     <View style={styles.container}>
-      {/* top header  */}
       <View
         style={{
           margin: 20,
@@ -103,13 +127,12 @@ export default function HomeScreen() {
                 textAlign: "center",
               }}
             >
-              999
+              {totalCoin} 
             </Text>
           </View>
         </View>
       </View>
 
-      {/* flat list  */}
       <Text
         style={{ fontSize: 25, fontWeight: "bold", margin: 20, fontFamily: "" }}
       >
