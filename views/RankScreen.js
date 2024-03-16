@@ -20,8 +20,9 @@
       }
     };
 
-    const renderItem = ({ item }) => (
+    const renderItem = ({ item, index }) => (
       <View style={styles.rankItem}>
+        <Text>{index + 1}</Text>
         {item.user && (
           <>
             <Image source={{ uri: item.user.avatar }} style={styles.avatar} />
@@ -33,6 +34,7 @@
         )}
       </View>
     );
+    
     
 
     return (
