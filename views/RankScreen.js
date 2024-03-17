@@ -3,47 +3,68 @@ import { StyleSheet, Text, View, FlatList, Image } from "react-native";
 import axios from "axios";
 import { API_RANK_LIST } from "../configs/api-config";
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../configs/authContext';
 
 export default function RankScreen() {
   const [rankings, setRankings] = useState([]);
+  const { user } = useAuth(); 
   const navigation = useNavigation();
 
   useEffect(() => {
+    // console.log("Current user:", user); 
+  
+    // if (user) {
+    //   console.log("_id of current user:", user._id);
+    // } else {
+    //   console.log("Current user is null or undefined");
+    // }
+  
     fetchRankings();
-
-    // Gắn kết việc cập nhật dữ liệu xếp hạng với sự focus vào màn hình
     const unsubscribe = navigation.addListener('focus', () => {
       fetchRankings();
     });
-
-    // Hủy gắn kết khi component bị unmount
+  
     return unsubscribe;
-  }, [navigation]);
-
+  }, [navigation, user]); 
+  
   const fetchRankings = async () => {
     try {
       const response = await axios.get(API_RANK_LIST);
       setRankings(response.data);
+  
+      response.data.forEach(item => {
+        // console.log("_id of item:", item._id);
+      });
     } catch (error) {
       console.error("Error fetching rankings:", error);
     }
   };
+  
 
-  const renderItem = ({ item, index }) => (
-    <View style={styles.rankItem}>
-      <Text>{index + 1}</Text>
-      {item.user && (
-        <>
-          <Image source={{ uri: item.user.avatar }} style={styles.avatar} />
-          <View>
-            <Text style={styles.username}>{item.user.name}</Text>
-            <Text>{item.scoreWithinSevenDays} points</Text>
-          </View>
-        </>
-      )}
-    </View>
-  );
-
+  const renderItem = ({ item, index }) => {
+    const itemId = item.user?._id;
+    const currentUserId = user?._id;
+    
+    // console.log("Item _id:", itemId);
+    // console.log("User _id:", currentUserId);
+  
+    return (
+      <View style={[styles.rankItem, itemId === currentUserId && styles.currentUserItem]}>
+        <Text>{index + 1}</Text>
+        {item.user && (
+          <>
+            <Image source={{ uri: item.user.avatar }} style={styles.avatar} />
+            <View>
+              <Text style={styles.username}>{item.user.name}</Text>
+              <Text>{item.scoreWithinSevenDays} points</Text>
+            </View>
+          </>
+        )}
+      </View>
+    );
+  };
+  
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Weekly Rankings</Text>
@@ -76,6 +97,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
+  },
+  currentUserItem: {
+    backgroundColor: "#CCFFCC", 
   },
   avatar: {
     width: 50,

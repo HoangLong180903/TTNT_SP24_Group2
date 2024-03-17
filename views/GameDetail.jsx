@@ -47,7 +47,6 @@ export default function GameDetail({ route, navigation }) {
   };
   
   
-  // Log dữ liệu user để kiểm tra
   console.log("User data:", user);
 
   if (!quizDetail || !userDataLoaded) {
