@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from "react-native";
 import axios from "axios";
 import { useAuth } from "../configs/authContext"; 
-import { API_LIST_QUIZZ, API_TOTAL_COIN_BY_UID } from "../configs/api-config"; 
-import { API_GET_COIN, API_LIST_QUIZZ } from "../configs/api-config";
+import { API_LIST_QUIZZ, API_TOTAL_COIN_BY_UID, API_GET_COIN } from "../configs/api-config"; 
 import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {

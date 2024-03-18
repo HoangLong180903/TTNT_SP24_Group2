@@ -7,7 +7,7 @@ const InfoScreen = () => {
   const { user, logout } = useAuth(); 
   
   return (
-    <View style={styles.InfoScreen, { marginTop: -90}}>
+    <View style={styles.InfoScreen}>
       <View style={[styles.accountInformationParent, styles.parentShadowBox]}>
         <Text style={[styles.accountInformation, styles.settingTypo]}>
           account information
@@ -251,6 +251,7 @@ const styles = StyleSheet.create({
     height: 979,
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
+    marginTop:-90
   },
 });
 
