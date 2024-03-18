@@ -1,10 +1,25 @@
 import * as React from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { useState } from "react";
+import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { Color, Border, FontSize } from "../configs/GlobalStyles";
 import { useAuth } from "../configs/authContext";
+import { useNavigation } from "@react-navigation/native";
 
 const InfoScreen = () => {
   const { user, logout } = useAuth(); 
+  const navigation = useNavigation();
+  const [password, setPassword] = useState("");
+  // const [previousPassword, setPreviousPassword] = useState("");
+
+  const handleLogout = () => {
+    setPassword("");
+    logout();
+    console.log("Đã đăng xuất, chuyển hướng đến màn hình đăng nhập...");
+    navigation.reset({ 
+      index: 0,
+      routes: [{ name: 'Màn Hình Đăng Nhập' }], 
+    });
+  };
   
   return (
     <View style={styles.InfoScreen, { marginTop: -90}}>
@@ -75,7 +90,9 @@ const InfoScreen = () => {
           Change Language
         </Text>
         <Text style={[styles.setting, styles.settingTypo]}>Setting</Text>
+        <TouchableOpacity onPress={handleLogout}>
         <Text style={[styles.logout, styles.helpTypo]}>Logout</Text>
+        </TouchableOpacity>
         <Image
           style={[styles.accountCircleIcon, styles.iconLayout]}
           contentFit="cover"
