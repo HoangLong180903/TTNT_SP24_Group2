@@ -14,6 +14,7 @@ import HomeScreen from "./HomeScreen";
 import TroChoiScreen from "./GameScreen";
 import DiemThuongScreen from "./DiemThuongScreen";
 import InfoUserScreen from "./InfoUserScreen";
+import ResultScreen from "./ResultScreen";
 const Tab = createBottomTabNavigator();
 export default function Home() {
   return (
@@ -39,6 +40,16 @@ export default function Home() {
           tabBarLabel: 'Game',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="gamepad-variant-outline" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Kết Quả"
+        component={ResultScreen}
+        options={{
+          tabBarLabel: 'Result',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="ab-testing" color={color} size={26} />
           ),
         }}
       />

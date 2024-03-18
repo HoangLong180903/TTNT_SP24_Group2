@@ -10,7 +10,7 @@ import ManHinhDangKy from "./views/SignUp";
 import ManHinhHome from "./views/MainContainer";
 import GameDetail from "./views/GameDetail";
 import StartQuizz from "./views/StartQuizz";
-import ResultQuizz from "./views/resultQuizz";
+import ResultQuizz from "./views/ResultQuizz";
 
 export default function App() {
   return (

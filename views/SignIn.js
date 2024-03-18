@@ -75,7 +75,6 @@ export default function SignIn() {
         }}
         placeholder="Email"
         onChangeText={(txt) => {
-          // setUsername(txt);
           setEmail(txt);
         }}
       />
@@ -94,7 +93,6 @@ export default function SignIn() {
         }}
         placeholder="Password"
         onChangeText={(txt) => {
-          // setUsername(txt);
           setPassword(txt);
         }}
       />
@@ -107,10 +105,6 @@ export default function SignIn() {
           borderRadius: 10,
           justifyContent: "center",
         }}
-        // onPress={() => {
-        //   navigation.navigate("Màn Hình Chính");
-          
-        // }}
         onPress={() => {
             login(email,password);
           }}

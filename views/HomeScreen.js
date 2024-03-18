@@ -2,16 +2,18 @@ import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from "react
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useAuth } from "../configs/authContext"; 
-import { API_LIST_QUIZZ } from "../configs/api-config";
+import { API_GET_COIN, API_LIST_QUIZZ } from "../configs/api-config";
 import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
   const [data, setData] = useState([]);
+  const [coin,setCoin] = useState([]);
   const navigation = useNavigation();
   const { user } = useAuth();
 
   useEffect(() => {
     fetchData();
+    getCoin();
   }, []);
 
   const fetchData = async () => {
@@ -20,6 +22,18 @@ export default function HomeScreen() {
         `${API_LIST_QUIZZ}`
       );
       setData(response.data);
+      // console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const getCoin = async () => {
+    try {
+      const response = await axios.get(
+        `${API_GET_COIN}${user._id}`
+      );
+      setCoin(response.data);
       // console.log(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -95,16 +109,16 @@ export default function HomeScreen() {
             <Text style={{ fontSize: 18, fontWeight: "600" }}>
               Điểm thưởng
             </Text>
-            <Text
-              style={{
+            {coin ? (
+              <Text style={{
                 fontSize: 16,
                 color: "#0CA9A9",
                 fontWeight: "bold",
                 textAlign: "center",
-              }}
-            >
-              999
-            </Text>
+              }}>{coin.totalScore}</Text>
+            ) : (
+              <Text>Loading...</Text>
+            )}
           </View>
         </View>
       </View>

@@ -104,7 +104,6 @@ export default function SignUp() {
         </Text>
         <TouchableOpacity
         onPress={() => {
-          // navigation.navigate("Màn Hình Đăng Nhập");
           navigation.goBack()
         }}>
           <Text style={{ fontSize: 18, color: "#F46535", textAlign: "center", marginLeft: 5}}>
