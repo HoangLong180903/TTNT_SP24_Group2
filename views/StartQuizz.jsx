@@ -1,8 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { API_TAKE_QUIZZ } from '../configs/api-config';
+import { API_TAKE_QUIZZ, API_RANK_LIST } from '../configs/api-config';
 import { useNavigation } from '@react-navigation/native';
+import { useQuizHistory } from '../configs/QuizHistoryContext';
 import axios from 'axios';
+
+const fetchRankings = async (setRankings) => {
+    try {
+        const response = await axios.get(API_RANK_LIST);
+        setRankings(response.data);
+        console.log("Data rank:", response.data);
+    } catch (error) {
+        console.error("Error fetching rankings:", error);
+    }
+};
 
 const StartQuizz = ({ navigation, route }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -11,13 +22,19 @@ const StartQuizz = ({ navigation, route }) => {
     const { userId, quizDetail } = route.params;
     const [answerStatus, setAnswerStatus] = useState(null);
     const [score, setScore] = useState(0);
-
+    const { history, updateHistory } = useQuizHistory();
+    const [rankings, setRankings] = useState([]);
     useEffect(() => {
         setTestDetail(quizDetail);
         if (quizDetail && quizDetail.questions) {
             setSelectedAnswers(Array(quizDetail.questions.length).fill(null));
         }
     }, [quizDetail]);
+
+    useEffect(() => {
+        fetchRankings(setRankings);
+    }, []);
+
 
     const handleAnswer = (answer) => {
         const updatedSelectedAnswers = [...selectedAnswers];
@@ -55,9 +72,14 @@ const StartQuizz = ({ navigation, route }) => {
                     const questionsWithAnswers = testDetail.questions.map(question => ({
                         ...question,
                         userAnswer: selectedAnswers[testDetail.questions.indexOf(question)],
-                        allAnswers: question.answers.map(ans => ans.answer) // Add all answers to the question object
+                        allAnswers: question.answers.map(ans => ans.answer)
                     }));
+                    const newHistory = [...history, questionsWithAnswers]; 
+                    updateHistory(newHistory);
+                    fetchRankings(setRankings);
                     navigation.navigate('ResultQuizz', { correctAnswersCount, incorrectAnswersCount, score, questions: questionsWithAnswers });
+                    // navigation.navigate('QuizScreen');
+                   
                 })
                 .catch(error => {
                     console.error('Error submitting answer:', error);
@@ -66,6 +88,7 @@ const StartQuizz = ({ navigation, route }) => {
             alert("Please answer all questions before submitting.");
         }
     };
+
 
     return (
         <View style={styles.container}>

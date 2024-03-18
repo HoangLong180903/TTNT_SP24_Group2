@@ -13,3 +13,13 @@ export const API_TAKE_QUIZZ= `http://${IP_ADDRESS}:6002/api/quizz/takeTest`;
 
 export const API_GET_COIN = `http://${IP_ADDRESS}:6002/api/score/`;
 
+export const API_HISTORY_TAKE_QUIZ_BY_UID= `http://${IP_ADDRESS}:6002/api/quizz/sessions/user`;
+
+
+// API SCORE
+
+export const API_TOTAL_COIN_BY_UID= `http://${IP_ADDRESS}:6002/api/score`;
+
+
+// API RANK
+export const API_RANK_LIST= `http://${IP_ADDRESS}:6002/api/rank/weekly`;

@@ -27,7 +27,7 @@ export default function GameDetail({ route, navigation }) {
     try {
       const response = await axios.get(`${API_QUIZZ_DETAIL}/${testId}`);
       setQuizDetail(response.data);
-      console.log("Data question: ", response.data)
+      // console.log("Data question: ", response.data)
     } catch (error) {
       console.error('Error fetching quiz detail:', error);
     }
@@ -47,7 +47,6 @@ export default function GameDetail({ route, navigation }) {
   };
   
   
-  // Log dữ liệu user để kiểm tra
   console.log("User data:", user);
 
   if (!quizDetail || !userDataLoaded) {

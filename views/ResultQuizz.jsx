@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 const ResultQuizz = ({ route }) => {
     const { correctAnswersCount, incorrectAnswersCount, score, questions } = route.params;
@@ -17,11 +16,8 @@ const ResultQuizz = ({ route }) => {
 
     return (
         <View style={styles.container}>
-
             <ScrollView contentContainerStyle={styles.scrollContainer}>
-                {/* Thêm một khoảng trống */}
                 <View style={{ height: 20 }} />
-
                 <Text style={styles.heading}>Quiz Result</Text>
                 <View style={styles.resultContainer}>
                     <Text style={styles.resultText}>Total Score: {score}</Text>
@@ -43,14 +39,13 @@ const ResultQuizz = ({ route }) => {
                                 >
                                     {`${answerIndex + 1}. ${answer}`}
                                     {question.userAnswer === answer ? ' (Your Answer)' : null}
+                                    {question.answers.find(ans => ans.correct.toLowerCase() === 'true').answer === answer ? ' (Correct Answer)' : null}
                                 </Text>
                             ))}
                         </View>
                     </View>
                 ))}
             </ScrollView>
-
-
             <TouchableOpacity style={styles.homeButton} onPress={navigateToHome}>
                 <Text style={styles.buttonText}>Go to Home</Text>
             </TouchableOpacity>

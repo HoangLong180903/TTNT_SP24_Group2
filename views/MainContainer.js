@@ -11,8 +11,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "./HomeScreen";
-import TroChoiScreen from "./GameScreen";
-import DiemThuongScreen from "./DiemThuongScreen";
+import QuizScreen from "./QuizScreen"
+import RankScreen from "./RankScreen";
 import InfoUserScreen from "./InfoUserScreen";
 import ResultScreen from "./ResultScreen";
 const Tab = createBottomTabNavigator();
@@ -34,12 +34,12 @@ export default function Home() {
         }}
       />
       <Tab.Screen
-        name="Trò Chơi"
-        component={TroChoiScreen}
+        name="History Take Quiz" 
+        component={QuizScreen} 
         options={{
-          tabBarLabel: 'Game',
+          tabBarLabel: 'History', 
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="gamepad-variant-outline" color={color} size={26} />
+            <MaterialCommunityIcons name="history" color={color} size={26} />
           ),
         }}
       />
@@ -55,9 +55,9 @@ export default function Home() {
       />
       <Tab.Screen
         name="Rank & Điểm Thưởng"
-        component={DiemThuongScreen}
+        component={RankScreen}
         options={{
-          tabBarLabel: 'Rank Coin',
+          tabBarLabel: 'Rank',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="wallet-giftcard" color={color} size={26} />
           ),
