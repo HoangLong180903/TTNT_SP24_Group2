@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -15,9 +15,13 @@ import { API_LOGIN } from '../configs/api-config';
 
 export default function SignIn() {
   const navigation = useNavigation();
-  const { setUser } = useAuth();
+  const { setUser, logout } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    setPassword("");
+  }, []);
 
   const login = async () => {
     try {
@@ -45,6 +49,11 @@ export default function SignIn() {
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleLogout = () => {
+    setPassword(""); 
+    logout();
   };
 
 
@@ -97,6 +106,7 @@ export default function SignIn() {
           setPassword(txt);
         }}
         secureTextEntry={true}
+        value={password}
       />
 
       <TouchableOpacity
