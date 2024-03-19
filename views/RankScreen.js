@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, FlatList, Image } from "react-native";
+import { FontAwesome } from '@expo/vector-icons';
+
 import axios from "axios";
 import { API_RANK_LIST } from "../configs/api-config";
 import { useNavigation } from '@react-navigation/native';
@@ -11,14 +13,6 @@ export default function RankScreen() {
   const navigation = useNavigation();
 
   useEffect(() => {
-    // console.log("Current user:", user); 
-  
-    // if (user) {
-    //   console.log("_id of current user:", user._id);
-    // } else {
-    //   console.log("Current user is null or undefined");
-    // }
-  
     fetchRankings();
     const unsubscribe = navigation.addListener('focus', () => {
       fetchRankings();
@@ -31,26 +25,39 @@ export default function RankScreen() {
     try {
       const response = await axios.get(API_RANK_LIST);
       setRankings(response.data);
-  
-      response.data.forEach(item => {
-        // console.log("_id of item:", item._id);
-      });
     } catch (error) {
       console.error("Error fetching rankings:", error);
     }
   };
   
-
   const renderItem = ({ item, index }) => {
     const itemId = item.user?._id;
     const currentUserId = user?._id;
-    
-    // console.log("Item _id:", itemId);
-    // console.log("User _id:", currentUserId);
+    const rankIcon = index < 3 ? getRankIcon(index) : null;
+    let iconColor = "#000"; 
+  
+ 
+    switch (index) {
+      case 0:
+        iconColor = "gold";
+        break;
+      case 1:
+        iconColor = "silver"; 
+        break;
+      case 2:
+        iconColor = "#CD7F32";
+        break;
+      default:
+        iconColor = "#000";
+        break;
+    }
   
     return (
       <View style={[styles.rankItem, itemId === currentUserId && styles.currentUserItem]}>
-        <Text>{index + 1}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          {rankIcon && <FontAwesome name={rankIcon} style={[styles.rankIcon, { color: iconColor }]} />}
+          <Text>{index + 1}</Text>
+        </View>
         {item.user && (
           <>
             <Image source={{ uri: item.user.avatar }} style={styles.avatar} />
@@ -63,7 +70,10 @@ export default function RankScreen() {
       </View>
     );
   };
-  
+
+  const getRankIcon = (index) => {
+    return 'trophy'; 
+  };
   
   return (
     <View style={styles.container}>
@@ -97,9 +107,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
+    width: '80%',
+    alignSelf: 'center',
   },
   currentUserItem: {
     backgroundColor: "#CCFFCC", 
+  },
+  rankIcon: {
+    fontSize: 20,
+    marginRight: 5,
   },
   avatar: {
     width: 50,
