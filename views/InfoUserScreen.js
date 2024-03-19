@@ -55,17 +55,22 @@ const InfoScreen = () => {
           <Text style={[styles.passwordAndSecurity, styles.helpTypo]}>
             Password and Security
           </Text>
+          
         </TouchableOpacity>
+        <Text style={[styles.persionalPassword, styles.changeYourETypo]}>
+            persional password
+          </Text>
         <TouchableOpacity onPress={handleNavigateToInfoDetail}>
           <Text style={[styles.doUser, styles.helpTypo]}>Do User</Text>
         </TouchableOpacity>
-        <Text style={[styles.persionalPassword, styles.changeYourETypo]}>
-          persional password
-        </Text>
-        <Text style={[styles.email, styles.helpTypo]}>Email</Text>
+
+        <TouchableOpacity onPress={() => navigation.navigate('ChangeEmail')}>
+          <Text style={[styles.email, styles.helpTypo]}>Email</Text>
+          
+        </TouchableOpacity>
         <Text style={[styles.changeYourE, styles.changeYourETypo]}>
-          change your e - mail
-        </Text>
+            change your e - mail
+          </Text>
         <Image
           style={[styles.accountCircleIcon, styles.iconLayout]}
           contentFit="cover"
