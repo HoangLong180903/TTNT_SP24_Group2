@@ -15,6 +15,8 @@ import ResultQuizz from "./views/ResultQuizz";
 import HomeScreen from "./views/HomeScreen";
 import QuizScreen from "./views/QuizScreen";
 import RankScreen from "./views/RankScreen";
+import ChangeCapcha from "./views/ChangeCapcha";
+import ChangePassW from "./views/ChangePassW";
 
 export default function App() {
   return (
@@ -32,6 +34,10 @@ export default function App() {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="QuizScreen" component={QuizScreen} />
             <Stack.Screen name="RankScreen" component={RankScreen} />
+            <Stack.Screen name="ChangeCapcha" component={ChangeCapcha} />
+            <Stack.Screen name="ChangePassW" component={ChangePassW} />
+
+
 
 
 

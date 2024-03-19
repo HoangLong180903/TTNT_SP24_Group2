@@ -20,6 +20,10 @@ const InfoScreen = () => {
       routes: [{ name: 'Màn Hình Đăng Nhập' }], 
     });
   };
+
+  const handleChangeCapcha = () => {
+    navigation.navigate('ChangeCapcha');
+  };
   
   return (
     <View style={styles.InfoScreen, { marginTop: -90}}>
@@ -42,9 +46,11 @@ const InfoScreen = () => {
           contentFit="cover"
           source={require("../assets/arrow-forward-ios.png")}
         />
+        <TouchableOpacity onPress={handleChangeCapcha}>
         <Text style={[styles.passwordAndSecurity, styles.helpTypo]}>
           Password and Security
         </Text>
+        </TouchableOpacity>
         <Text style={[styles.doUser, styles.helpTypo]}>Do User</Text>
         <Text style={[styles.persionalPassword, styles.changeYourETypo]}>
           persional password
