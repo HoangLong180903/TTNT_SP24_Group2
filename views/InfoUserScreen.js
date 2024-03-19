@@ -6,7 +6,7 @@ import { useAuth } from "../configs/authContext";
 import { useNavigation } from "@react-navigation/native";
 
 const InfoScreen = () => {
-  const { user, logout } = useAuth(); 
+  const { user, logout } = useAuth();
   const navigation = useNavigation();
   const [password, setPassword] = useState("");
   // const [previousPassword, setPreviousPassword] = useState("");
@@ -15,18 +15,23 @@ const InfoScreen = () => {
     setPassword("");
     logout();
     console.log("Đã đăng xuất, chuyển hướng đến màn hình đăng nhập...");
-    navigation.reset({ 
+    navigation.reset({
       index: 0,
-      routes: [{ name: 'Màn Hình Đăng Nhập' }], 
+      routes: [{ name: 'Màn Hình Đăng Nhập' }],
     });
   };
 
   const handleChangeCapcha = () => {
     navigation.navigate('ChangeCapcha');
   };
-  
+
+  const handleNavigateToInfoDetail = () => {
+    navigation.navigate('InfoDetail');
+  };
+
+
   return (
-    <View style={styles.InfoScreen, { marginTop: -90}}>
+    <View style={styles.InfoScreen, { marginTop: -90 }}>
       <View style={[styles.accountInformationParent, styles.parentShadowBox]}>
         <Text style={[styles.accountInformation, styles.settingTypo]}>
           account information
@@ -47,11 +52,13 @@ const InfoScreen = () => {
           source={require("../assets/arrow-forward-ios.png")}
         />
         <TouchableOpacity onPress={handleChangeCapcha}>
-        <Text style={[styles.passwordAndSecurity, styles.helpTypo]}>
-          Password and Security
-        </Text>
+          <Text style={[styles.passwordAndSecurity, styles.helpTypo]}>
+            Password and Security
+          </Text>
         </TouchableOpacity>
-        <Text style={[styles.doUser, styles.helpTypo]}>Do User</Text>
+        <TouchableOpacity onPress={handleNavigateToInfoDetail}>
+          <Text style={[styles.doUser, styles.helpTypo]}>Do User</Text>
+        </TouchableOpacity>
         <Text style={[styles.persionalPassword, styles.changeYourETypo]}>
           persional password
         </Text>
@@ -97,7 +104,7 @@ const InfoScreen = () => {
         </Text>
         <Text style={[styles.setting, styles.settingTypo]}>Setting</Text>
         <TouchableOpacity onPress={handleLogout}>
-        <Text style={[styles.logout, styles.helpTypo]}>Logout</Text>
+          <Text style={[styles.logout, styles.helpTypo]}>Logout</Text>
         </TouchableOpacity>
         <Image
           style={[styles.accountCircleIcon, styles.iconLayout]}
@@ -116,12 +123,12 @@ const InfoScreen = () => {
         />
       </View>
       {user && user.avatar && (
-          <Image
-            style={styles.image8Icon}
-            contentFit="cover"
-            source={{ uri: user.avatar }}
-          />
-        )}
+        <Image
+          style={styles.image8Icon}
+          contentFit="cover"
+          source={{ uri: user.avatar }}
+        />
+      )}
     </View>
   );
 };
@@ -200,7 +207,7 @@ const styles = StyleSheet.create({
     color: "#777",
     fontSize: FontSize.size_xs,
     left: 65
-    },
+  },
   arrowForwardIosIcon: {
     top: 66,
   },
