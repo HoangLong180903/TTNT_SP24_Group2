@@ -3,8 +3,12 @@ export const IP_ADDRESS = '192.168.1.5';
 // api users
 
 export const API_LOGIN= `http://${IP_ADDRESS}:6002/api/login`;
+
 export const API_CHANGE_PASSWORD= `http://${IP_ADDRESS}:6002/api/change-password`;
 
+export const API_CHANGE_EMAIL= `http://${IP_ADDRESS}:6002/api/change-email`;
+
+export const API_VERIFY_PASSWORD= `http://${IP_ADDRESS}:6002/api/veryfy-password`;
 
 
 // api test
