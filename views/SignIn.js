@@ -113,7 +113,7 @@ export default function SignIn() {
         style={{
           width: 360,
           backgroundColor: "#F46535",
-          height: 45,
+          height: 46,
           alignSelf: "center",
           borderRadius: 10,
           justifyContent: "center",

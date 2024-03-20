@@ -11,7 +11,7 @@ const ResultQuizz = ({ route }) => {
     };
 
     const navigateToHome = () => {
-        navigation.navigate('Màn Hình Chính');
+        navigation.navigate('Màn Hình Chính.');
     };
 
     return (
