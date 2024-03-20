@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
-import '../configs/crypto-polyfill'
 import { useWalletConnectModal } from '@walletconnect/modal-react-native';
 export default function ResultScreen() {
     const navigation = useNavigation();

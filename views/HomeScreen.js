@@ -14,7 +14,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     fetchData();
-    fetchTotalCoin();
+    getCoin();
     fetchRankings();
   }, []);
 

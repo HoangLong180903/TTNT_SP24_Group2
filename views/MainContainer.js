@@ -15,6 +15,7 @@ import QuizScreen from "./QuizScreen"
 import RankScreen from "./RankScreen";
 import InfoUserScreen from "./InfoUserScreen";
 import ResultScreen from "./ResultScreen";
+import DiemThuongScreen  from "./DiemThuongScreen";
 const Tab = createBottomTabNavigator();
 export default function Home() {
   return (
@@ -45,7 +46,7 @@ export default function Home() {
       />
       <Tab.Screen
         name="Kết Quả"
-        component={ResultScreen}
+        component={DiemThuongScreen}
         options={{
           tabBarLabel: 'Result',
           tabBarIcon: ({ color }) => (

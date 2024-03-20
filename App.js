@@ -15,7 +15,7 @@ import ResultQuizz from "./views/ResultQuizz";
 import HomeScreen from "./views/HomeScreen";
 import QuizScreen from "./views/QuizScreen";
 import RankScreen from "./views/RankScreen";
-
+import DiemThuongScreen from "./views/DiemThuongScreen";
 export default function App() {
   return (
     <NavigationContainer>
@@ -28,11 +28,11 @@ export default function App() {
             <Stack.Screen name='Màn Hình Chính' component={ManHinhHome} />
             <Stack.Screen name="GameDetail" component={GameDetail} />
             <Stack.Screen name="StartQuizz" component={StartQuizz} />
-            <Stack.Screen name="ResultQuizz" component={ResultQuizz} />
+            <Stack.Screen name="Điểm thưởng" component={DiemThuongScreen} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="QuizScreen" component={QuizScreen} />
             <Stack.Screen name="RankScreen" component={RankScreen} />
-
+            <Stack.Screen name="ResultScreen" component={ResultQuizz}/>
 
 
           </Stack.Navigator>

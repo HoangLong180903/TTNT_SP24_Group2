@@ -77,7 +77,7 @@ const StartQuizz = ({ navigation, route }) => {
                     const newHistory = [...history, questionsWithAnswers]; 
                     updateHistory(newHistory);
                     fetchRankings(setRankings);
-                    navigation.navigate('ResultQuizz', { correctAnswersCount, incorrectAnswersCount, score, questions: questionsWithAnswers });
+                    navigation.navigate('ResultScreen', { correctAnswersCount, incorrectAnswersCount, score, questions: questionsWithAnswers });
                     // navigation.navigate('QuizScreen');
                    
                 })
