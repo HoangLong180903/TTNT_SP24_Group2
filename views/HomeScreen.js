@@ -2,28 +2,25 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, Image, FlatList, TouchableOpacity } from "react-native";
 import axios from "axios";
 import { useAuth } from "../configs/authContext"; 
-import { API_LIST_QUIZZ, API_TOTAL_COIN_BY_UID, API_GET_COIN } from "../configs/api-config"; 
+import { API_LIST_QUIZZ, API_TOTAL_COIN_BY_UID, API_RANK_LIST } from "../configs/api-config"; 
 import { useNavigation } from '@react-navigation/native';
 
 export default function HomeScreen() {
   const [data, setData] = useState([]);
   const [totalCoin, setTotalCoin] = useState(0); 
-  const [coin,setCoin] = useState([]);
+  const [userRank, setUserRank] = useState(null);
   const navigation = useNavigation();
   const { user } = useAuth();
-  // console.log("Data user: ", user)
 
   useEffect(() => {
     fetchData();
-    fetchTotalCoin(); 
-    getCoin();
+    fetchTotalCoin();
+    fetchRankings();
   }, []);
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
-        `${API_LIST_QUIZZ}`
-      );
+      const response = await axios.get(API_LIST_QUIZZ);
       setData(response.data);
       // console.log(response.data);
     } catch (error) {
@@ -33,16 +30,26 @@ export default function HomeScreen() {
 
   const getCoin = async () => {
     try {
-      const response = await axios.get(
-        `${API_GET_COIN}${user._id}`
-      );
-      setCoin(response.data);
-      // console.log(response.data);
+      if (user && user._id) {
+        const response = await axios.get(`${API_TOTAL_COIN_BY_UID}/${user._id}`);
+        setTotalCoin(response.data.totalScore);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
+  const fetchRankings = async () => {
+    try {
+      const response = await axios.get(API_RANK_LIST);
+      const rankings = response.data;
+      const userRankIndex = rankings.findIndex(item => item.user?._id === user._id);
+      setUserRank(userRankIndex !== -1 ? userRankIndex + 1 : null);
+    } catch (error) {
+      console.error("Error fetching rankings:", error);
+    }
+  };
+  
   const renderItem = ({ item }) => (
     <TouchableOpacity style={styles.itemContainer} onPress={() => navigateToDetail(item._id)}> 
       <Image source={{ uri: item.image }} style={styles.image} />
@@ -54,82 +61,40 @@ export default function HomeScreen() {
   const navigateToDetail = (quizId) => { 
     navigation.navigate('GameDetail', { testId: quizId });
   };
-  
-  
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          margin: 20,
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
+      <View style={{ margin: 20, flexDirection: "row", justifyContent: "space-between" }}>
         <View>
-          <Text style={{ fontSize: 30, fontWeight: "400" }}>
-            Hi, {user.username} 
-          </Text>
-          <Text style={{ fontSize: 15, color: "#9F9F9F" }}>
-            Let's make this day productive
-          </Text>
+          <Text style={{ fontSize: 30, fontWeight: "400" }}>Hi, {user.username}</Text>
+          <Text style={{ fontSize: 15, color: "#9F9F9F" }}>Let's make this day productive</Text>
         </View>
-        <Image
-          style={{ width: 50, height: 50, borderRadius: 50 }}
-          source={{ uri: user.avatar }} 
-        />
-
+        <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: user.avatar }} />
       </View>
 
       <View style={styles.cardView}>
         <View style={{ flexDirection: "row" }}>
-          <Image
-            style={{ width: 50, height: 50, alignSelf: "center" }}
-            source={require("../assets/cup.png")}
-          />
+          <Image style={{ width: 50, height: 50, alignSelf: "center" }} source={require("../assets/cup.png")} />
           <View style={{ flexDirection: "column", alignSelf: "center" }}>
             <Text style={{ fontSize: 18, fontWeight: "600" }}>Xếp hạng</Text>
-            <Text
-              style={{
-                fontSize: 16,
-                color: "#0CA9A9",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}
-            >
-              4953
+            <Text style={{ fontSize: 16, color: "#0CA9A9", fontWeight: "bold", textAlign: "center" }}>
+              {userRank ? userRank : "-"}
             </Text>
           </View>
         </View>
 
         <View style={{ flexDirection: "row" }}>
-          <Image
-            style={{ width: 50, height: 50, alignSelf: "center" }}
-            source={require("../assets/points.png")}
-          />
+          <Image style={{ width: 50, height: 50, alignSelf: "center" }} source={require("../assets/points.png")} />
           <View style={{ flexDirection: "column", alignSelf: "center" }}>
-            <Text style={{ fontSize: 18, fontWeight: "600" }}>
-              Điểm thưởng
+            <Text style={{ fontSize: 18, fontWeight: "600" }}>Điểm thưởng</Text>
+            <Text style={{ fontSize: 16, color: "#0CA9A9", fontWeight: "bold", textAlign: "center" }}>
+              {totalCoin} 
             </Text>
-            {coin ? (
-              <Text style={{
-                fontSize: 16,
-                color: "#0CA9A9",
-                fontWeight: "bold",
-                textAlign: "center",
-              }}>{coin.totalScore}</Text>
-            ) : (
-              <Text>Loading...</Text>
-            )}
           </View>
         </View>
       </View>
 
-      <Text
-        style={{ fontSize: 25, fontWeight: "bold", margin: 20, fontFamily: "" }}
-      >
-        Let's play
-      </Text>
+      <Text style={{ fontSize: 25, fontWeight: "bold", margin: 20, fontFamily: "" }}>Let's play</Text>
       <FlatList
         data={data}
         renderItem={renderItem}
