@@ -67,7 +67,7 @@ export default function SignUp() {
           borderColor: "#000000",
           borderWidth: 0.5,
           height: 40,
-          padding: 10,
+          padding: 11,
           margin: 15,
           alignSelf: "center",
         }}
