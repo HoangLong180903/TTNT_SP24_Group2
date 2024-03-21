@@ -42,13 +42,14 @@ const ChangePassW = () => {
           'Success',
           'Your password has been changed successfully.',
           [
-            // {
-            //   text: 'Logout',
-            //   onPress: () => {
-            //     navigateToLogin();
-            //     logout();
-            //   },
-            // },
+            {
+              text: 'Logout',
+              onPress: () => {
+                // logout(); // Đăng xuất người dùng
+                navigateToLogin(); // Chuyển hướng đến màn hình đăng nhậpư
+              
+              },
+            },
             {
               text: 'OK',
               onPress: () => navigateToHome(),
@@ -71,12 +72,12 @@ const ChangePassW = () => {
     });
   };
 
-  // const navigateToLogin = () => {
-  //   navigation.reset({
-  //     index: 0,
-  //     routes: [{ name: 'Login' }],
-  //   });
-  // };
+  const navigateToLogin = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Màn Hình Đăng Nhập' }],
+    });
+  };
 
   useEffect(() => {
     if (errorMessage) {

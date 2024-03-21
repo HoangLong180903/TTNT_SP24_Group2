@@ -110,14 +110,14 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         borderWidth: 2,
         borderRadius: 10,
-        backgroundColor:'silver',
+        backgroundColor:'gainsboro',
         padding: 45,
         borderColor: 'lightgray',
     },
     captchaText: {
         fontSize: 30,
         fontWeight: 'bold',
-        color: 'red',
+        color: 'black',
         textAlign: 'center',
         
     },
