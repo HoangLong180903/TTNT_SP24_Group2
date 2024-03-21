@@ -42,6 +42,13 @@ const ChangePassW = () => {
           'Success',
           'Your password has been changed successfully.',
           [
+            // {
+            //   text: 'Logout',
+            //   onPress: () => {
+            //     navigateToLogin();
+            //     logout();
+            //   },
+            // },
             {
               text: 'OK',
               onPress: () => navigateToHome(),
@@ -63,6 +70,13 @@ const ChangePassW = () => {
       routes: [{ name: 'Màn Hình Chính' }],
     });
   };
+
+  // const navigateToLogin = () => {
+  //   navigation.reset({
+  //     index: 0,
+  //     routes: [{ name: 'Login' }],
+  //   });
+  // };
 
   useEffect(() => {
     if (errorMessage) {
