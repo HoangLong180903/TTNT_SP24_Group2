@@ -7,14 +7,16 @@ import { API_LIST_QUIZZ, API_TOTAL_COIN_BY_UID, API_RANK_LIST } from "../configs
 
 export default function DiemThuongScreen() {
   const [nfts, setNfts] = useState([]);
-  const [totalCoin, setTotalCoin] = useState(100); 
+  const [data, setData] = useState([]);
+  const [totalCoin, setTotalCoin] = useState(); 
   const { user } = useAuth();
+  console.log(user);
   const xKey = "Z0s1HomCTG-Ppn--"; // Thay thế bằng x-api-key của bạn
   const wallID = "9FWUokoE27tEtaxCvcUwQwQdtY5bbzcgqX7miKct1geS"; // Thay thế bằng địa chỉ ví của bạn
   const network = "devnet"; // Sử dụng mạng devnet
   useEffect(() => {
     fetchNFTs();
-    getCoin
+    getCoin();
   }, []);
 
   const getCoin = async () => {
