@@ -15,7 +15,6 @@ import ResultQuizz from "./views/ResultQuizz";
 import HomeScreen from "./views/HomeScreen";
 import QuizScreen from "./views/QuizScreen";
 import RankScreen from "./views/RankScreen";
-import DiemThuongScreen from "./views/DiemThuongScreen";
 import ChangeCapcha from "./views/ChangeCapcha";
 import ChangePassW from "./views/ChangePassW";
 import InfoDetail from "./views/InfoDeteil";
@@ -36,7 +35,6 @@ export default function App() {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="QuizScreen" component={QuizScreen} />
             <Stack.Screen name="RankScreen" component={RankScreen} />
-            <Stack.Screen name="ResultScreen" component={ResultQuizz}/>
             <Stack.Screen name="ChangeCapcha" component={ChangeCapcha} />
             <Stack.Screen name="ChangePassW" component={ChangePassW} />
             <Stack.Screen name="InfoDetail" component={InfoDetail} />
