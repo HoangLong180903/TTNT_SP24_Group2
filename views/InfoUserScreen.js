@@ -29,6 +29,10 @@ const InfoScreen = () => {
     navigation.navigate('InfoDetail');
   };
 
+  const handleNavigateWallet= () => {
+    navigation.navigate('HomeWall');
+  };
+
 
   return (
     <View style={styles.InfoScreen, { marginTop: -90 }}>
@@ -71,6 +75,13 @@ const InfoScreen = () => {
         <Text style={[styles.changeYourE, styles.changeYourETypo]}>
             change your e - mail
           </Text>
+          <TouchableOpacity onPress={handleNavigateWallet}>
+          <Text style={[styles.wallet, styles.helpTypo]}>
+            Wallet
+          </Text>
+          </TouchableOpacity>
+          
+         
         <Image
           style={[styles.accountCircleIcon, styles.iconLayout]}
           contentFit="cover"
@@ -224,6 +235,9 @@ const styles = StyleSheet.create({
   },
   passwordAndSecurity: {
     top: 110,
+  },
+  wallet:{
+    top:220,
   },
   doUser: {
     top: 59,
