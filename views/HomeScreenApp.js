@@ -5,7 +5,7 @@ import { useAuth } from "../configs/authContext";
 import { API_LIST_QUIZZ, API_TOTAL_COIN_BY_UID, API_RANK_LIST } from "../configs/api-config"; 
 import { useNavigation } from '@react-navigation/native';
 
-export default function HomeScreen() {
+export default function HomeScreenApp() {
   const [data, setData] = useState([]);
   const [totalCoin, setTotalCoin] = useState(0); 
   const [userRank, setUserRank] = useState(null);

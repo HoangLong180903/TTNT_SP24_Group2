@@ -10,7 +10,7 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "./HomeScreen";
+import HomeScreen from "./HomeScreenApp";
 import QuizScreen from "./QuizScreen"
 import RankScreen from "./RankScreen";
 import InfoUserScreen from "./InfoUserScreen";
