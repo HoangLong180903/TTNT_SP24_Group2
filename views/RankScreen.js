@@ -91,23 +91,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     marginBottom: 10,
+    textAlign:"center"
   },
   rankItem: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: "#ccc",
-    width: '80%',
+    width: '95%',
     alignSelf: 'center',
   },
   currentUserItem: {
@@ -121,10 +121,11 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    marginRight: 10,
+    marginRight: 80,
   },
   username: {
     fontWeight: "bold",
     fontSize: 16,
+
   },
 });

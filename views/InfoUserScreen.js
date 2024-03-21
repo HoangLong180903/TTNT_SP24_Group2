@@ -55,6 +55,7 @@ const InfoScreen = () => {
           <Text style={[styles.passwordAndSecurity, styles.helpTypo]}>
             Password and Security
           </Text>
+
         </TouchableOpacity>
         <TouchableOpacity onPress={handleNavigateToInfoDetail}>
           <Text style={[styles.doUser, styles.helpTypo]}>Do User</Text>
@@ -132,6 +133,8 @@ const InfoScreen = () => {
     </View>
   );
 };
+
+
 
 const styles = StyleSheet.create({
   parentShadowBox: {

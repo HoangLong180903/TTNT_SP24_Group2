@@ -19,6 +19,9 @@ import ChangeCapcha from "./views/ChangeCapcha";
 import ChangePassW from "./views/ChangePassW";
 import InfoDetail from "./views/InfoDeteil";
 
+import ChangeEmail from "./views/ChangeEmail";
+
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -42,6 +45,11 @@ export default function App() {
 
 
 
+
+
+
+
+            <Stack.Screen name="ChangeEmail" component={ChangeEmail} />
 
 
           </Stack.Navigator>
