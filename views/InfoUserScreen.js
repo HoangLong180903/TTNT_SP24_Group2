@@ -80,7 +80,9 @@ const InfoScreen = () => {
             Wallet
           </Text>
           </TouchableOpacity>
-          
+          <Text style={[styles.changeYourW, styles.changeYourETypo]}>
+            connect wallet
+          </Text>
          
         <Image
           style={[styles.accountCircleIcon, styles.iconLayout]}
@@ -97,8 +99,14 @@ const InfoScreen = () => {
           contentFit="cover"
           source={require("../assets/drafts.png")}
         />
+
+        <Image
+          style={[styles.walletContainer, styles.iconLayout]}
+          contentFit="cover"
+          source={require("../assets/Wallet.png")}
+        />
       </View>
-      <View style={[styles.arrowForwardIosParent, styles.parentShadowBox]}>
+      <View style={[styles.arrowForwardIosParent, styles.parentShadowBox2]}>
         <Image
           style={[styles.arrowForwardIosIcon, styles.arrowIconLayout]}
           contentFit="cover"
@@ -151,7 +159,30 @@ const InfoScreen = () => {
 
 const styles = StyleSheet.create({
   parentShadowBox: {
-    height: 246,
+    height: 276,
+    width: 395,
+    borderWidth: 0.5,
+    borderColor: Color.colorSilver,
+    borderStyle: "solid",
+    shadowOpacity: 1,
+    elevation: 4,
+    shadowRadius: 4,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    borderRadius: Border.br_xl,
+    marginLeft: -197,
+    left: "50%",
+    position: "relative",
+    overflow: "hidden",
+    backgroundColor: Color.colorWhite,
+    marginBottom: 20,
+  },
+
+  parentShadowBox2: {
+    height: 228,
     width: 395,
     borderWidth: 0.5,
     borderColor: Color.colorSilver,
@@ -170,6 +201,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
+    marginTop: 20, 
   },
   settingTypo: {
     textAlign: "left",
@@ -237,7 +269,7 @@ const styles = StyleSheet.create({
     top: 110,
   },
   wallet:{
-    top:220,
+    top:215,
   },
   doUser: {
     top: 59,
@@ -250,6 +282,9 @@ const styles = StyleSheet.create({
   },
   changeYourE: {
     top: 187,
+  },
+  changeYourW: {
+    top: 237,
   },
   accountCircleIcon: {
     top: 66,
@@ -300,7 +335,15 @@ const styles = StyleSheet.create({
     height: 979,
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
+    marginTop: -90,
+  },
+  walletContainer: {
+    top: 215,
+    flexDirection: 'row', 
+    alignItems: 'center', 
   },
 });
+
+
 
 export default InfoScreen;

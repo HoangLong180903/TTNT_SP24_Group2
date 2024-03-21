@@ -22,6 +22,7 @@ import ChangeEmail from "./views/ChangeEmail";
 import { HomeScreen } from "./src/screens";
 import { HomeNavigator } from "./src/navigators/HomeNavigator";
 import { AppNavigator } from "./src/navigators/AppNavigator";
+import { SettingsScreen } from "./src/screens";
 
 import "./src/polyfills";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -72,6 +73,7 @@ export default function App() {
           <QueryClientProvider client={queryClient}>
             <ClusterProvider>
               <ConnectionProvider config={{ commitment: "processed" }}>
+                <PaperProvider>
                 <Stack.Navigator initialRouteName='Màn Hình Đăng Nhập' screenOptions={{ headerShown: false, gestureEnabled: false }}>
                   <Stack.Screen name='Màn Hình Đăng Nhập' component=
                     {ManHinhDangNhap} />
@@ -90,8 +92,10 @@ export default function App() {
                   <Stack.Screen name="HomeWall" component={HomeScreen} />
                   <Stack.Screen name="HomeNavigator" component={HomeNavigator} />
                   <Stack.Screen name="AppNavigator" component={AppNavigator} />
+                  <Stack.Screen name="SettingScreen" component={SettingsScreen} />
 
                 </Stack.Navigator>
+                </PaperProvider>
               </ConnectionProvider>
             </ClusterProvider>
           </QueryClientProvider>
