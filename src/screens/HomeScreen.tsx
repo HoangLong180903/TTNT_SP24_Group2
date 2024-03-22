@@ -6,12 +6,14 @@ import { Section } from "../Section";
 import { useAuthorization } from "../utils/useAuthorization";
 import { AccountDetailFeature } from "../components/account/account-detail-feature";
 import { SignInFeature } from "../components/sign-in/sign-in-feature";
+import { TopBar } from "../components/top-bar/top-bar-feature";
 
 export function HomeScreen() {
   const { selectedAccount } = useAuthorization();
 
   return (
     <View style={styles.screenContainer}>
+      <TopBar/>
       <Text
         style={{ fontWeight: "bold", marginBottom: 12 }}
         variant="displaySmall"
