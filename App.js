@@ -93,7 +93,7 @@ export default function App() {
                   <Stack.Screen name="HomeWall" component={HomeScreen} />
                   <Stack.Screen name="HomeNavigator" component={HomeNavigator} />
                   <Stack.Screen name="AppNavigator" component={AppNavigator} />
-                  <Stack.Screen name="SettingScreen" component={SettingsScreen} />
+                  <Stack.Screen name="Settings" component={SettingsScreen} />
 
                 </Stack.Navigator>
                 </PaperProvider>
