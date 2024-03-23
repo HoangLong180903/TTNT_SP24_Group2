@@ -18,7 +18,7 @@ import {
 import { useState, useMemo, useEffect } from "react";
 import { ellipsify } from "../../utils/ellipsify";
 import { AppModal } from "../ui/app-modal";
-import { API_UPDATE_SOL_ADDRESS } from "../../../configs/api-config";
+import { API_UPDATE_SOL_ADDRESS, API_UPDATE_SOL_ADDRESS_USER } from "../../../configs/api-config";
 import { useAuth } from "../../../configs/authContext";
 import axios from "axios";
 
@@ -28,13 +28,12 @@ function lamportsToSol(balance: number) {
 
 export function AccountBalance({ address }: { address: PublicKey }) {
   const [errorMessage, setErrorMessage] = useState('');
-  const [valueAddress, setValueAddress] = useState("F8zYJEbLJ3n6rKjHrno5tSG6Uvz3cf1fzpP5uBNU7zhg");
   const { user } = useAuth();
   useEffect(() => {
     if(address != null){
     console.log(address);
-    // setValueAddress(address);
-    handleUpdateSolAddress();
+    // handleUpdateSolAddress();
+    handleUpdateSolAddressUser();
   }else {
     console.log("Disconnect successfully")
   }
@@ -47,9 +46,32 @@ export function AccountBalance({ address }: { address: PublicKey }) {
             }
             const responseSuccessfully = await axios.put(API_UPDATE_SOL_ADDRESS, {
                 userId: user._id,
-                solanaAddress: valueAddress
+                solanaAddress: "F8zYJEbLJ3n6rKjHrno5tSG6Uvz3cf1fzpP5uBNU7zhg"
             });
-            console.log("sol address" , responseSuccessfully);
+            
+    
+            if (responseSuccessfully.status === 200 && responseSuccessfully.data.success) {
+                Alert.alert('Success', responseSuccessfully.data.message);
+            } else {
+                Alert.alert('Change to SolAddress Succesfully!');
+            }
+        } catch (error) {
+            console.error(error);
+            Alert.alert('Error', 'Internal Server Error');
+        }
+    };
+
+    const handleUpdateSolAddressUser= async () => {
+        try {
+            if (!user || !user._id) {
+                Alert.alert('Error', 'User ID is missing');
+                return;
+            }
+            const responseSuccessfully = await axios.put(API_UPDATE_SOL_ADDRESS_USER, {
+                userId: user._id,
+                solanaAddress: address
+            });
+            
     
             if (responseSuccessfully.status === 200 && responseSuccessfully.data.success) {
                 Alert.alert('Success', responseSuccessfully.data.message);
