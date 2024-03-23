@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   screenContainer: {
     padding: 16,
     flex: 1,
+    backgroundColor:"#FFF"
   },
   buttonGroup: {
     flexDirection: "column",

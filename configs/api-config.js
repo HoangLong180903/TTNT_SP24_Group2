@@ -37,4 +37,8 @@ export const API_CREATE_CAPCHA= `http://${IP_ADDRESS}:6002/api/capcha/create`;
 export const API_GET_CAPCHA= `http://${IP_ADDRESS}:6002/api/capcha/get`;
 export const API_VALIDATE_CAPCHA= `http://${IP_ADDRESS}:6002/api/capcha/validate`;
 
+//api update sol address user
+export const API_UPDATE_SOL_ADDRESS= `http://${IP_ADDRESS}:6002/api/update-soladdress`;
+export const API_UPDATE_SOL_ADDRESS_USER= `http://${IP_ADDRESS}:6002/api/update-solana-address`;
+
 

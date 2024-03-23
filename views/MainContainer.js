@@ -45,30 +45,30 @@ export default function Home() {
         }}
       />
       <Tab.Screen
-        name="Kết Quả"
+        name="Reward Gift"
         component={DiemThuongScreen}
         options={{
-          tabBarLabel: 'Result',
+          tabBarLabel: 'Reward',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="ab-testing" color={color} size={26} />
+            <MaterialCommunityIcons name="gift-open-outline" color={color} size={26} />
           ),
         }}
       />
       <Tab.Screen
-        name="Rank & Điểm Thưởng"
+        name="Rank"
         component={RankScreen}
         options={{
           tabBarLabel: 'Rank',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="wallet-giftcard" color={color} size={26} />
+            <MaterialCommunityIcons name="medal-outline" color={color} size={26} />
           ),
         }}
       />
       <Tab.Screen
-        name="Thông Tin Cá Nhân"
+        name="Info User"
         component={InfoUserScreen}
         options={{
-          tabBarLabel: 'Me',
+          tabBarLabel: 'User',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account-circle-outline" color={color} size={26} />
           ),

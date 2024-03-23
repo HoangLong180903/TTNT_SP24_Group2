@@ -26,5 +26,6 @@ const styles = StyleSheet.create({
   topBar: {
     justifyContent: "flex-end",
     alignItems: "center",
+    backgroundColor:"#FFF"
   },
 });

@@ -5,37 +5,49 @@ import { useAuth } from "../configs/authContext";
 import { API_LIST_QUIZZ, API_TOTAL_COIN_BY_UID, API_RANK_LIST } from "../configs/api-config"; 
 import { useNavigation } from '@react-navigation/native';
 
-export default function HomeScreenApp() {
+export default function HomeScreen() {
   const [data, setData] = useState([]);
   const [totalCoin, setTotalCoin] = useState(0); 
   const [userRank, setUserRank] = useState(null);
   const navigation = useNavigation();
   const { user } = useAuth();
 
+  // useEffect(() => {
+  //   fetchData();
+  //   fetchTotalCoin();
+  //   fetchRankings();
+  // }, []);
+
   useEffect(() => {
     fetchData();
-    getCoin();
+    fetchTotalCoin();
     fetchRankings();
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+    fetchData();
+    fetchTotalCoin();
+    fetchRankings();
+    });
+  
+    return unsubscribe;
+  }, [navigation, user]); 
 
   const fetchData = async () => {
     try {
       const response = await axios.get(API_LIST_QUIZZ);
       setData(response.data);
-      // console.log(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  const getCoin = async () => {
+  const fetchTotalCoin = async () => {
     try {
       if (user && user._id) {
         const response = await axios.get(`${API_TOTAL_COIN_BY_UID}/${user._id}`);
         setTotalCoin(response.data.totalScore);
       }
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.error("Error fetching total coin:", error);
     }
   };
 

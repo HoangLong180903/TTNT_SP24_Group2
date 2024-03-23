@@ -43,6 +43,14 @@ const ChangePassW = () => {
           'Your password has been changed successfully.',
           [
             {
+              text: 'Logout',
+              onPress: () => {
+                // logout(); // Đăng xuất người dùng
+                navigateToLogin(); // Chuyển hướng đến màn hình đăng nhậpư
+              
+              },
+            },
+            {
               text: 'OK',
               onPress: () => navigateToHome(),
             },
@@ -61,6 +69,13 @@ const ChangePassW = () => {
     navigation.reset({
       index: 0,
       routes: [{ name: 'Màn Hình Chính' }],
+    });
+  };
+
+  const navigateToLogin = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Màn Hình Đăng Nhập' }],
     });
   };
 
