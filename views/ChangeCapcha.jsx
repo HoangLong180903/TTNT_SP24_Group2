@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, ActivityIndicator, Image,ImageBackground } from 'react-native';
 import axios from 'axios';
 import { API_GET_CAPCHA, API_VALIDATE_CAPCHA, API_CREATE_CAPCHA } from '../configs/api-config';
 import { useAuth } from '../configs/authContext';
@@ -65,28 +65,13 @@ export default function ChangeCapcha({ navigation }) {
         }
     }, [user, isCaptchaCreated]);
 
-    // useEffect(() => {
-    //     if (expiredAt !== null) {
-    //         const timer = setTimeout(() => {
-    //             setIsCaptchaCreated(false);
-    //             setExpiredAt(null);
-    //         }, expiredAt - Date.now());
-
-    //         return () => clearTimeout(timer);
-    //     }
-    // }, [expiredAt]);
-
     return (
         <View style={styles.container}>
-            
-
-            <Text style={styles.captchaText}>{captcha}</Text>
-
-            {/* {expiredAt && (
-                <Text style={styles.expirationText}>
-                    Expired At: {new Date(expiredAt).toLocaleTimeString()}
-                </Text>
-            )} */}
+           
+            <View style={styles.captchaContainer}>
+                <Text style={styles.captchaText}>{captcha}</Text>
+                {/* <Image style={{alignSelf:"flex-start",}} source={require("../assets/capcha_robot.png")}/> */}
+            </View>
 
             <TextInput
                 placeholder="Enter CAPTCHA"
@@ -94,12 +79,11 @@ export default function ChangeCapcha({ navigation }) {
                 onChangeText={setCaptchaInput}
                 style={styles.input}
             />
-
-            <TouchableOpacity style={styles.button} onPress={createNewCaptcha}>
+             <TouchableOpacity style={styles.button} onPress={createNewCaptcha}>
                 <Text style={styles.buttonText}>New CAPTCHA</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={validateCaptcha}>
+            <TouchableOpacity style={styles.submitButton} onPress={validateCaptcha}>
                 <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
 
@@ -113,32 +97,78 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#fff',
     },
-    input: {
-        borderWidth: 1,
-        borderColor: 'black',
-        padding: 10,
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
         marginBottom: 20,
+        color: '#333',
+    },
+    captchaContainer: {
+        alignItems: 'center',
+        justifyContent:"center",
+        marginBottom: 20,
+        borderWidth: 2,
+        borderRadius: 10,
+        backgroundColor:'#fff',
+        padding: 45,
+        borderColor: 'lightgray',
+    },
+    captchaText: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: 'black',
+        textAlign: 'center',
+        
+    },
+    // refreshButton: {
+    //     marginTop: 10,
+    //     padding: 10,
+    //     borderRadius: 5,
+    //     alignItems: 'center',
+
+    // },
+    // refreshIcon: {
+    //     width: 34,
+    //     height: 34,
+    //     tintColor: 'dodgerblue',
+    //     marginLeft: 250,
+    // },
+    input: {
+        height: 40,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        paddingHorizontal: 10,
+        marginBottom: 20,
+        borderRadius: 5,
         width: '80%',
+        color: '#333',
+    },
+    submitButton: {
+        backgroundColor: 'blue',
+        paddingVertical: 12,
+        paddingHorizontal: 40,
+        borderRadius: 25,
     },
     button: {
         backgroundColor: 'blue',
         padding: 10,
         borderRadius: 5,
         marginBottom: 10,
+        paddingVertical: 12,
+        paddingHorizontal: 40,
+        borderRadius: 25,
     },
     buttonText: {
         color: 'white',
         textAlign: 'center',
     },
-    captchaText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    expirationText: {
-        fontSize: 16,
-        marginBottom: 10,
+    imageBackground: {
+        width: 300,
+        height: 150,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     loader: {
         marginTop: 20,

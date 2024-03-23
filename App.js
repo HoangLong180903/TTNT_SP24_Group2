@@ -24,7 +24,6 @@ import { HomeScreen } from "./src/screens";
 import { HomeNavigator } from "./src/navigators/HomeNavigator";
 import { AppNavigator } from "./src/navigators/AppNavigator";
 import { SettingsScreen } from "./src/screens";
-
 import "./src/polyfills";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { ConnectionProvider } from "./src/utils/ConnectionProvider";
@@ -40,7 +39,6 @@ import {
   adaptNavigationTheme,
 } from "react-native-paper";
 import { ClusterProvider } from "./src/components/cluster/cluster-data-access";
-
 const queryClient = new QueryClient();
 
 
@@ -82,7 +80,7 @@ export default function App() {
                   <Stack.Screen name='Màn Hình Chính' component={ManHinhHome} />
                   <Stack.Screen name="GameDetail" component={GameDetail} />
                   <Stack.Screen name="StartQuizz" component={StartQuizz} />
-                  <Stack.Screen name="ResultQuizz" component={ResultQuizz} />
+                  <Stack.Screen name="ResultScreen" component={ResultQuizz} />
                   <Stack.Screen name="Home" component={HomeScreenApp} />
                   <Stack.Screen name="QuizScreen" component={QuizScreen} />
                   <Stack.Screen name="RankScreen" component={RankScreen} />
@@ -90,11 +88,14 @@ export default function App() {
                   <Stack.Screen name="ChangePassW" component={ChangePassW} />
                   <Stack.Screen name="InfoDetail" component={InfoDetail} />
                   <Stack.Screen name="ChangeEmail" component={ChangeEmail} />
+                  {/*  */}
                   <Stack.Screen name="HomeWall" component={HomeScreen} />
                   <Stack.Screen name="HomeNavigator" component={HomeNavigator} />
                   <Stack.Screen name="AppNavigator" component={AppNavigator} />
-                  <Stack.Screen name="SettingScreen" component={SettingsScreen} />
-
+                  {/* <Stack.Screen name="SettingScreen" component={SettingsScreen} /> */}
+                  <Stack.Screen name="Settings" component={SettingsScreen} />
+                  {/* <Stack.Screen name="WalletScreen" component={WalletScreen} /> */}
+                
                 </Stack.Navigator>
                 </PaperProvider>
               </ConnectionProvider>

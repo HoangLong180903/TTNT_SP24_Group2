@@ -6,7 +6,7 @@ import {
   useRequestAirdrop,
   useTransferSol,
 } from "./account-data-access";
-import { View, StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView, Alert } from "react-native";
 import {
   Text,
   useTheme,
@@ -15,15 +15,52 @@ import {
   DataTable,
   TextInput,
 } from "react-native-paper";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { ellipsify } from "../../utils/ellipsify";
 import { AppModal } from "../ui/app-modal";
+import { API_UPDATE_SOL_ADDRESS } from "../../../configs/api-config";
+import { useAuth } from "../../../configs/authContext";
+import axios from "axios";
 
 function lamportsToSol(balance: number) {
   return Math.round((balance / LAMPORTS_PER_SOL) * 100000) / 100000;
 }
 
 export function AccountBalance({ address }: { address: PublicKey }) {
+  const [errorMessage, setErrorMessage] = useState('');
+  const [valueAddress, setValueAddress] = useState("F8zYJEbLJ3n6rKjHrno5tSG6Uvz3cf1fzpP5uBNU7zhg");
+  const { user } = useAuth();
+  useEffect(() => {
+    if(address != null){
+    console.log(address);
+    // setValueAddress(address);
+    handleUpdateSolAddress();
+  }else {
+    console.log("Disconnect successfully")
+  }
+  }, [user]); 
+  const handleUpdateSolAddress= async () => {
+        try {
+            if (!user || !user._id) {
+                Alert.alert('Error', 'User ID is missing');
+                return;
+            }
+            const responseSuccessfully = await axios.put(API_UPDATE_SOL_ADDRESS, {
+                userId: user._id,
+                solanaAddress: valueAddress
+            });
+            console.log("sol address" , responseSuccessfully);
+    
+            if (responseSuccessfully.status === 200 && responseSuccessfully.data.success) {
+                Alert.alert('Success', responseSuccessfully.data.message);
+            } else {
+                Alert.alert('Change to SolAddress Succesfully!');
+            }
+        } catch (error) {
+            console.error(error);
+            Alert.alert('Error', 'Internal Server Error');
+        }
+    };
   const query = useGetBalance({ address });
   return (
     <>
@@ -46,7 +83,7 @@ export function AccountButtonGroup({ address }: { address: PublicKey }) {
   return (
     <>
       <View style={styles.accountButtonGroup}>
-        <AirdropRequestModal
+        <AirdropRequestModal  
           hide={() => setShowAirdropModal(false)}
           show={showAirdropModal}
           address={address}

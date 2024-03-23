@@ -35,7 +35,7 @@ const InfoScreen = () => {
 
 
   return (
-    <View style={styles.InfoScreen, { marginTop: -90 }}>
+    <View style={styles.InfoScreen, { marginTop: -110 }}>
       <View style={[styles.accountInformationParent, styles.parentShadowBox]}>
         <Text style={[styles.accountInformation, styles.settingTypo]}>
           account information
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   },
 
   parentShadowBox2: {
-    height: 228,
+    height: 220,
     width: 395,
     borderWidth: 0.5,
     borderColor: Color.colorSilver,
@@ -226,8 +226,8 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   iconLayout: {
-    height: 35,
-    width: 35,
+    height: 30,
+    width: 30,
     left: 18,
     position: "absolute",
   },
@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
     top: 168,
   },
   arrowForwardIosParent: {
-    top: 441,
+    top: 430,
   },
   image8Icon: {
     marginLeft: -50,

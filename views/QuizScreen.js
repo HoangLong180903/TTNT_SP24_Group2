@@ -65,7 +65,6 @@ export default function QuizScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Lịch sử làm quiz</Text>
       <FlatList
         data={history}
         renderItem={renderHistoryItem}
