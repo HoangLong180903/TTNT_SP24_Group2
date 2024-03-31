@@ -1,7 +1,12 @@
 import React from "react";
-import {View, Text,StyleSheet, FlatList,Animated, TouchableOpacity, Button, Image} from "react-native";
+import { View, Text, StyleSheet, FlatList, Animated, TouchableOpacity, Button, Image } from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
 
+const Done = ({...props}) => (
+  <TouchableOpacity style={{ marginHorizontal: 10 }} {...props}>
+    <Text style={{ fontSize: 16 }}> Done </Text>
+  </TouchableOpacity>
+);
 // const Skip = ({...props})=>(
 //     <Button
 //     title="Skip"
@@ -15,61 +20,52 @@ import Onboarding from "react-native-onboarding-swiper";
 //     {...props}
 //     />
 // );
-const Done = ({...props})=>(
-   <TouchableOpacity
-   style={{marginHorizontal:10}}
-   {...props}
-   >
-    <Text style={{fontSize:16}}> Done </Text>
 
-   </TouchableOpacity>
-);
-
-const OnboardingScreen = ({navigation}) =>{
-    return(
-        <Onboarding
-            // SkipButtonComponent={Skip}
-            // NextButtonComponent ={Next}
-            DoneButtonComponent ={Done}
-            onSkip={() => navigation.navigate("Màn Hình Đăng Nhập")}
-            onDone={() => navigation.navigate("Màn Hình Đăng Nhập")}
-        pages={[
-            {
-                backgroundColor: '#a6e4d0',
-                image : <Image source = {require ('../assets/Onbroading-fage1-logup.png')}  />,
-                title : 'Connect to the World',
-                subtitle: 'A New Way To Connect With The World',
-            },
-            {
-                backgroundColor: '#fdeb93',
-                image : <Image source = {require ('../assets/Onbroading-fage2-logup.png')}  />,
-                title : 'Share Your Favorites',
-                subtitle: 'Share Your Thoughts With Similar Kind Of People',
-            },
-            {
-                backgroundColor: '#a6e4d0',
-                image : <Image source = {require ('../assets/Onbroading-fage3-logup.png')}  />,
-                title : 'Become The Star',
-                subtitle: 'Let The Spot Light Capture You',
-            },
-
-        ]}
-        
-        />
-
-    
-    );
+const OnboardingScreen = ({navigation}) => {
+  return (
+    <Onboarding
+    // SkipButtonComponent={Skip}
+  // NextButtonComponent ={Next}
+      DoneButtonComponent={Done}
+      onSkip={() => navigation.navigate("Màn Hình Đăng Nhập")}
+      onDone={() => navigation.navigate("Màn Hình Đăng Nhập")}
+      pages={[
+        {
+          backgroundColor: '#a6e4d0',
+          image: <Image source={require('../assets/Onbroading1.png')} style={styles.image} />,
+          title: 'Connect to the World',
+          subtitle: 'A New Way To Connect With The World',
+        },
+        {
+          backgroundColor: '#fdeb93',
+          image: <Image source={require('../assets/Onbroading2.png')} style={styles.image} />,
+          title: 'Share Your Favorites',
+          subtitle: 'Share Your Thoughts With Similar Kind Of People',
+        },
+        {
+          backgroundColor: '#a6e4d0',
+          image: <Image source={require('../assets/Onbroading3.png')} style={styles.image} />,
+          title: 'Become The Star',
+          subtitle: 'Let The Spot Light Capture You',
+        },
+      ]}
+    />
+  );
 };
+
 export default OnboardingScreen;
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
-        flex:1,
+        flex:0.7,
         alignItems:'center',
         justifyContent:'center',
     },
-    image : {
-        flex:0.7,
-        justifyContent:'center',
-    }
+  image: {
+    marginTop: 100,
+    width: '100%', 
+    height: 830, 
+    resizeMode: 'contain', 
+    borderRadius: 20, 
+  },
 });
