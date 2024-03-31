@@ -18,6 +18,7 @@ import RankScreen from "./views/RankScreen";
 import ChangeCapcha from "./views/ChangeCapcha";
 import ChangePassW from "./views/ChangePassW";
 import InfoDetail from "./views/InfoDeteil";
+import OnboardingScreen from "./views/OnboardingScreen";
 import ChangeEmail from "./views/ChangeEmail";
 
 export default function App() {
@@ -25,9 +26,9 @@ export default function App() {
     <NavigationContainer>
       <AuthProvider>
         <QuizHistoryProvider>
-          <Stack.Navigator initialRouteName='Màn Hình Đăng Nhập' screenOptions={{ headerShown: false, gestureEnabled: false }}>
-            <Stack.Screen name='Màn Hình Đăng Nhập' component=
-              {ManHinhDangNhap} />
+          <Stack.Navigator initialRouteName='Onboarding' screenOptions={{ headerShown: false, gestureEnabled: false }}>
+          <Stack.Screen name='Onboarding' component={OnboardingScreen} />
+            <Stack.Screen name='Màn Hình Đăng Nhập' component={ManHinhDangNhap} />
             <Stack.Screen name='Màn Hình Đăng Ký' component={ManHinhDangKy} />
             <Stack.Screen name='Màn Hình Chính' component={ManHinhHome} />
             <Stack.Screen name="GameDetail" component={GameDetail} />
