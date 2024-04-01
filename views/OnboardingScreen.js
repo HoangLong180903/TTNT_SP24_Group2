@@ -61,11 +61,4 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
     },
-  image: {
-    marginTop: 100,
-    width: '100%', 
-    height: 830, 
-    resizeMode: 'contain', 
-    borderRadius: 20, 
-  },
 });
