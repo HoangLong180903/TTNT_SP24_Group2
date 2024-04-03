@@ -27,7 +27,7 @@ export default function GameDetail({ route, navigation }) {
     try {
       const response = await axios.get(`${API_QUIZZ_DETAIL}/${testId}`);
       setQuizDetail(response.data);
-      // console.log("Data question: ", response.data)
+      console.log("Data question: ", response.data)
     } catch (error) {
       console.error('Error fetching quiz detail:', error);
     }
@@ -67,10 +67,10 @@ export default function GameDetail({ route, navigation }) {
       </View>
       <Text style={styles.textTitle}>{quizDetail.name}</Text>
       <Text style={styles.text}>{quizDetail.description}</Text>
-      <Text style={styles.text}>Number of Questions: {quizDetail && quizDetail.questions ? quizDetail.questions.length : 'N/A'}</Text>
+      <Text style={[styles.text, {flex:0.5}]}>Number of Questions: {quizDetail && quizDetail.questions ? quizDetail.questions.length : 'N/A'}</Text>
 
       <TouchableOpacity style={styles.startButton} onPress={handleStartQuiz}>
-        <Text style={styles.startButtonText}>Start</Text>
+        <Text style={styles.startButtonText}>Play Quiz</Text>
       </TouchableOpacity>
     </View>
   );
@@ -82,46 +82,47 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   contentContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginBottom: 10,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 300,
     borderRadius: 10,
   },
   textTitle: {
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 10,
+    fontWeight: "bold",
+    
   },
   text: {
     fontSize: 18,
-    marginTop: 10,
   },
   backIcon: {
-    position: 'absolute',
+    position: "absolute",
     top: 40,
     left: 10,
     zIndex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: "rgba(0,0,0,0.5)",
     borderRadius: 20,
     padding: 10,
   },
   startButton: {
-    backgroundColor: '#008080',
+    width: 200,
+    backgroundColor: "#A26AC0",
     paddingVertical: 15,
     paddingHorizontal: 30,
     borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 20,
-    alignSelf: 'center',
+    alignSelf: "center",
+    borderRadius: 20,
   },
   startButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });

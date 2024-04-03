@@ -74,9 +74,12 @@ export function AccountBalance({ address }: { address: PublicKey }) {
             
     
             if (responseSuccessfully.status === 200 && responseSuccessfully.data.success) {
-                Alert.alert('Success', responseSuccessfully.data.message);
+                // Alert.alert('Success', responseSuccessfully.data.message);
+                console.log('Success', responseSuccessfully.data.message)
             } else {
-                Alert.alert('Change to SolAddress Succesfully!');
+                // Alert.alert('Change to SolAddress Succesfully!');
+                console.log("Change to SolAddress Succesfully!")
+
             }
         } catch (error) {
             console.error(error);

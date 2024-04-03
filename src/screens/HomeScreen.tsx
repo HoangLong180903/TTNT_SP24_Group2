@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, Image } from "react-native";
 import { Text } from "react-native-paper";
 
 import { Section } from "../Section";
@@ -15,28 +15,29 @@ export function HomeScreen() {
     <View style={styles.screenContainer}>
       <TopBar/>
       <Text
-        style={{ fontWeight: "bold", marginBottom: 12 }}
+        style={{ fontWeight: "bold", fontSize:25 }}
         variant="displaySmall"
       >
-        Solana Mobile Expo Template
+        Solana Wallet Mobile
+      </Text>
+      <Text
+        style={{ fontWeight: "600", fontSize:14 , color:"#9F9F9F"}}
+        variant="displaySmall"
+      >
+        All purpose. Non-custodial. Safe.
       </Text>
       {selectedAccount ? (
         <AccountDetailFeature />
       ) : (
         <>
-          <Section
-            title="Solana SDKs"
-            description="Configured with Solana SDKs like Mobile Wallet Adapter and web3.js."
+          <Image
+            style={{width:"100%",height:"50%",alignSelf:"center"}}
+            source={require('../assets/4229368.webp')}  
+            resizeMode="cover" 
           />
-          <Section
-            title="UI Kit and Navigation"
-            description="Utilizes React Native Paper components and the React Native Navigation library."
-          />
-          <Section
-            title="Get started!"
-            description="Connect or Sign in with Solana (SIWS) to link your wallet account."
-          />
-          <SignInFeature />
+          <View style={{justifyContent:"flex-end"}}>
+            <SignInFeature/>
+          </View>
         </>
       )}
     </View>
@@ -54,3 +55,6 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
 });
+
+
+

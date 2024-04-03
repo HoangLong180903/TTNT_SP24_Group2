@@ -4,6 +4,7 @@ import { API_TAKE_QUIZZ, API_RANK_LIST } from '../configs/api-config';
 import { useNavigation } from '@react-navigation/native';
 import { useQuizHistory } from '../configs/QuizHistoryContext';
 import axios from 'axios';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const fetchRankings = async (setRankings) => {
     try {
@@ -91,93 +92,157 @@ const StartQuizz = ({ navigation, route }) => {
 
 
     return (
-        <View style={styles.container}>
-            {testDetail && testDetail.questions && testDetail.questions.length > 0 ? (
-                <>
-                    {testDetail.questions[currentIndex] ? (
-                        <View>
-                            <Text style={styles.question}>{testDetail.questions[currentIndex].content}</Text>
-                            <View style={styles.answersContainer}>
-                                {testDetail.questions[currentIndex].answers && testDetail.questions[currentIndex].answers.length > 0 ? (
-                                    testDetail.questions[currentIndex].answers.map((answer, index) => (
-                                        <TouchableOpacity
-                                            key={index}
-                                            style={[
-                                                styles.answerButton,
-                                                selectedAnswers[currentIndex] === answer.answer && styles.selectedAnswer,
-                                            ]}
-                                            onPress={() => handleAnswer(answer)}
-                                        >
-                                            <Text style={styles.answerText}>{answer.answer}</Text>
-                                        </TouchableOpacity>
-                                    ))
-                                ) : (
-                                    <Text style={styles.question}></Text>
-                                )}
-                            </View>
-                            <TouchableOpacity
-                                style={styles.nextButton}
-                                onPress={handleNextQuestion}
-                                disabled={selectedAnswers[currentIndex] === null}>
-                                <Text style={styles.nextButtonText}>Next</Text>
-                            </TouchableOpacity>
-                        </View>
-                    ) : (
-                        <Text style={styles.question}></Text>
-                    )}
-                </>
+      <SafeAreaView style={styles.container}>
+        {testDetail &&
+        testDetail.questions &&
+        testDetail.questions.length > 0 ? (
+          <>
+            {testDetail.questions[currentIndex] ? (
+              <View>
+                <View
+                  style={{
+                    backgroundColor: "#3C9E9E",
+                    padding: 20,
+                    justifyContent: "space-around",
+                    alignItems: "center",
+                    flex: 0.7,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      alignSelf: "flex-start",
+
+                      marginBottom: 10,
+                      color: "#FFF",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Question {currentIndex + 1}/
+                    {testDetail.questions.length}
+                  </Text>
+                  <Text style={styles.question}>
+                    {testDetail.questions[currentIndex].content}
+                  </Text>
+                </View>
+
+                <View style={styles.answersContainer}>
+                  {testDetail.questions[currentIndex].answers &&
+                  testDetail.questions[currentIndex].answers.length > 0 ? (
+                    testDetail.questions[currentIndex].answers.map(
+                      (answer, index) => (
+                        <TouchableOpacity
+                          key={index}
+                          style={[
+                            styles.answerButton,
+                            selectedAnswers[currentIndex] === answer.answer &&
+                              styles.selectedAnswer,
+                          ]}
+                          onPress={() => handleAnswer(answer)}
+                        >
+                          <Text
+                            style={[
+                              styles.answerText,
+                              selectedAnswers[currentIndex] === answer.answer &&
+                                styles.selectedAnswerText,
+                            ]}
+                          >
+                            {answer.answer}
+                          </Text>
+                        </TouchableOpacity>
+                      )
+                    )
+                  ) : (
+                    <Text style={styles.question}></Text>
+                  )}
+                </View>
+                <View style={{ flex: 0.3 }}>
+                  <TouchableOpacity
+                    style={styles.nextButton}
+                    onPress={handleNextQuestion}
+                    disabled={selectedAnswers[currentIndex] === null}
+                  >
+                    <Text style={styles.nextButtonText}>Next</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             ) : (
-                <Text style={styles.question}></Text>
+              <Text style={styles.question}></Text>
             )}
-            {/* <Text style={styles.score}>Score: {score}</Text> */}
-        </View>
+          </>
+        ) : (
+          <Text style={styles.question}></Text>
+        )}
+        {/* <Text style={styles.score}>Score: {score}</Text> */}
+      </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    question: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        textAlign: 'center',
-    },
-    answersContainer: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
-    },
-    answerButton: {
-        backgroundColor: '#eee',
-        padding: 10,
-        marginVertical: 5,
-        borderRadius: 5,
-    },
-    selectedAnswer: {
-        backgroundColor: '#acd900',
-    },
-    nextButton: {
-        backgroundColor: '#007BFF',
-        padding: 10,
-        marginVertical: 10,
-        borderRadius: 5,
-    },
-    nextButtonText: {
-        color: 'white',
-        fontSize: 16,
-        textAlign: 'center',
-    },
-    score: {
-        marginTop: 20,
-        fontSize: 18,
-        fontWeight: 'bold',
-    },
+  container: {
+    flex: 1,
+    // justifyContent: "center",
+    alignItems: "center",
+  },
+  question: {
+    backgroundColor: "#3C9E9E",
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+    textAlign: "center",
+    color: "#FFF",
+  },
+  answersContainer: {
+    flexDirection: "row",
+    rowGap: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 20,
+    flexWrap: "wrap",
+    flex:0.8,
+  },
+  answerButton: {
+    backgroundColor: "#eee",
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+    borderWidth: 0.5,
+    borderColor: "#BDBDBD",
+    width: 170,
+    margin: 5,
+    height:100,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  selectedAnswer: {
+    backgroundColor: "#56B837",
+  },
+  answerText: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  selectedAnswerText: {
+    color: "#FFF",
+  },
+  nextButton: {
+    backgroundColor: "#3C9E9E",
+    padding: 10,
+    marginVertical: 10,
+    borderRadius: 20,
+    width: 300,
+    alignSelf: "center",
+  },
+  nextButtonText: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center",
+    fontWeight:"bold"
+  },
+  score: {
+    marginTop: 20,
+    fontSize: 18,
+    fontWeight: "bold",
+  },
 });
 
 export default StartQuizz;

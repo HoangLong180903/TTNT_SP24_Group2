@@ -4,7 +4,7 @@ import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { Color, Border, FontSize } from "../configs/GlobalStyles";
 import { useAuth } from "../configs/authContext";
 import { useNavigation } from "@react-navigation/native";
-
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 const InfoScreen = () => {
   const { user, logout } = useAuth();
   const navigation = useNavigation();
@@ -35,7 +35,7 @@ const InfoScreen = () => {
 
 
   return (
-    <View style={styles.InfoScreen, { marginTop: -110 }}>
+    <View style={[styles.InfoScreen, { marginTop: -110 }]}>
       <View style={[styles.accountInformationParent, styles.parentShadowBox]}>
         <Text style={[styles.accountInformation, styles.settingTypo]}>
           account information
@@ -59,31 +59,27 @@ const InfoScreen = () => {
           <Text style={[styles.passwordAndSecurity, styles.helpTypo]}>
             Password and Security
           </Text>
-          
         </TouchableOpacity>
         <Text style={[styles.persionalPassword, styles.changeYourETypo]}>
-            persional password
-          </Text>
+          persional password
+        </Text>
         <TouchableOpacity onPress={handleNavigateToInfoDetail}>
           <Text style={[styles.doUser, styles.helpTypo]}>Do User</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('ChangeEmail')}>
+        <TouchableOpacity onPress={() => navigation.navigate("ChangeEmail")}>
           <Text style={[styles.email, styles.helpTypo]}>Email</Text>
-          
         </TouchableOpacity>
         <Text style={[styles.changeYourE, styles.changeYourETypo]}>
-            change your e - mail
-          </Text>
-          <TouchableOpacity onPress={handleNavigateWallet}>
-          <Text style={[styles.wallet, styles.helpTypo]}>
-            Wallet
-          </Text>
-          </TouchableOpacity>
-          <Text style={[styles.changeYourW, styles.changeYourETypo]}>
-            connect wallet
-          </Text>
-         
+          change your e - mail
+        </Text>
+        <TouchableOpacity onPress={handleNavigateWallet}>
+          <Text style={[styles.wallet, styles.helpTypo]}>Wallet</Text>
+        </TouchableOpacity>
+        <Text style={[styles.changeYourW, styles.changeYourETypo]}>
+          connect wallet
+        </Text>
+
         <Image
           style={[styles.accountCircleIcon, styles.iconLayout]}
           contentFit="cover"
@@ -100,10 +96,15 @@ const InfoScreen = () => {
           source={require("../assets/drafts.png")}
         />
 
-        <Image
+        {/* <Image
           style={[styles.walletContainer, styles.iconLayout]}
           contentFit="cover"
           source={require("../assets/Wallet.png")}
+        /> */}
+        <MaterialCommunityIcons
+          name="wallet-outline"
+          style={[styles.walletContainer, styles.iconLayout]}
+          size={30}
         />
       </View>
       <View style={[styles.arrowForwardIosParent, styles.parentShadowBox2]}>
@@ -122,7 +123,9 @@ const InfoScreen = () => {
           contentFit="cover"
           source={require("../assets/arrow-forward-ios.png")}
         />
-        <Text style={[styles.help, styles.helpTypo]}>Help</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Help")}>
+          <Text style={[styles.help, styles.helpTypo]}>Help</Text>
+        </TouchableOpacity>
         <Text style={[styles.changeLanguage, styles.helpTypo]}>
           Change Language
         </Text>
@@ -338,7 +341,7 @@ const styles = StyleSheet.create({
     marginTop:-90
   },
   walletContainer: {
-    top: 215,
+    top: 220,
     flexDirection: 'row', 
     alignItems: 'center', 
   },
