@@ -4,7 +4,7 @@ import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { Color, Border, FontSize } from "../configs/GlobalStyles";
 import { useAuth } from "../configs/authContext";
 import { useNavigation } from "@react-navigation/native";
-
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 const InfoScreen = () => {
   const { user, logout } = useAuth();
   const navigation = useNavigation();
@@ -29,9 +29,13 @@ const InfoScreen = () => {
     navigation.navigate('InfoDetail');
   };
 
+  const handleNavigateWallet= () => {
+    navigation.navigate('HomeWall');
+  };
+
 
   return (
-    <View style={styles.InfoScreen, { marginTop: -90 }}>
+    <View style={[styles.InfoScreen, { marginTop: -110 }]}>
       <View style={[styles.accountInformationParent, styles.parentShadowBox]}>
         <Text style={[styles.accountInformation, styles.settingTypo]}>
           account information
@@ -55,22 +59,27 @@ const InfoScreen = () => {
           <Text style={[styles.passwordAndSecurity, styles.helpTypo]}>
             Password and Security
           </Text>
-          
         </TouchableOpacity>
         <Text style={[styles.persionalPassword, styles.changeYourETypo]}>
-            persional password
-          </Text>
+          persional password
+        </Text>
         <TouchableOpacity onPress={handleNavigateToInfoDetail}>
           <Text style={[styles.doUser, styles.helpTypo]}>Do User</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate('ChangeEmail')}>
+        <TouchableOpacity onPress={() => navigation.navigate("ChangeEmail")}>
           <Text style={[styles.email, styles.helpTypo]}>Email</Text>
-          
         </TouchableOpacity>
         <Text style={[styles.changeYourE, styles.changeYourETypo]}>
-            change your e - mail
-          </Text>
+          change your e - mail
+        </Text>
+        <TouchableOpacity onPress={handleNavigateWallet}>
+          <Text style={[styles.wallet, styles.helpTypo]}>Wallet</Text>
+        </TouchableOpacity>
+        <Text style={[styles.changeYourW, styles.changeYourETypo]}>
+          connect wallet
+        </Text>
+
         <Image
           style={[styles.accountCircleIcon, styles.iconLayout]}
           contentFit="cover"
@@ -86,8 +95,19 @@ const InfoScreen = () => {
           contentFit="cover"
           source={require("../assets/drafts.png")}
         />
+
+        {/* <Image
+          style={[styles.walletContainer, styles.iconLayout]}
+          contentFit="cover"
+          source={require("../assets/Wallet.png")}
+        /> */}
+        <MaterialCommunityIcons
+          name="wallet-outline"
+          style={[styles.walletContainer, styles.iconLayout]}
+          size={30}
+        />
       </View>
-      <View style={[styles.arrowForwardIosParent, styles.parentShadowBox]}>
+      <View style={[styles.arrowForwardIosParent, styles.parentShadowBox2]}>
         <Image
           style={[styles.arrowForwardIosIcon, styles.arrowIconLayout]}
           contentFit="cover"
@@ -103,7 +123,9 @@ const InfoScreen = () => {
           contentFit="cover"
           source={require("../assets/arrow-forward-ios.png")}
         />
-        <Text style={[styles.help, styles.helpTypo]}>Help</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Help")}>
+          <Text style={[styles.help, styles.helpTypo]}>Help</Text>
+        </TouchableOpacity>
         <Text style={[styles.changeLanguage, styles.helpTypo]}>
           Change Language
         </Text>
@@ -140,7 +162,30 @@ const InfoScreen = () => {
 
 const styles = StyleSheet.create({
   parentShadowBox: {
-    height: 246,
+    height: 276,
+    width: 395,
+    borderWidth: 0.5,
+    borderColor: Color.colorSilver,
+    borderStyle: "solid",
+    shadowOpacity: 1,
+    elevation: 4,
+    shadowRadius: 4,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowColor: "rgba(0, 0, 0, 0.25)",
+    borderRadius: Border.br_xl,
+    marginLeft: -197,
+    left: "50%",
+    position: "relative",
+    overflow: "hidden",
+    backgroundColor: Color.colorWhite,
+    marginBottom: 20,
+  },
+
+  parentShadowBox2: {
+    height: 220,
     width: 395,
     borderWidth: 0.5,
     borderColor: Color.colorSilver,
@@ -159,6 +204,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
+    marginTop: 20, 
   },
   settingTypo: {
     textAlign: "left",
@@ -183,8 +229,8 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   iconLayout: {
-    height: 35,
-    width: 35,
+    height: 30,
+    width: 30,
     left: 18,
     position: "absolute",
   },
@@ -225,6 +271,9 @@ const styles = StyleSheet.create({
   passwordAndSecurity: {
     top: 110,
   },
+  wallet:{
+    top:215,
+  },
   doUser: {
     top: 59,
   },
@@ -236,6 +285,9 @@ const styles = StyleSheet.create({
   },
   changeYourE: {
     top: 187,
+  },
+  changeYourW: {
+    top: 237,
   },
   accountCircleIcon: {
     top: 66,
@@ -268,7 +320,7 @@ const styles = StyleSheet.create({
     top: 168,
   },
   arrowForwardIosParent: {
-    top: 441,
+    top: 430,
   },
   image8Icon: {
     marginLeft: -50,
@@ -286,7 +338,15 @@ const styles = StyleSheet.create({
     height: 979,
     overflow: "hidden",
     backgroundColor: Color.colorWhite,
+    marginTop:-90
+  },
+  walletContainer: {
+    top: 220,
+    flexDirection: 'row', 
+    alignItems: 'center', 
   },
 });
+
+
 
 export default InfoScreen;

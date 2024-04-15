@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
+import {
+  View,
+  TextInput,
+  Button,
+  Text,
+  StyleSheet,
+  Alert,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { API_CHANGE_PASSWORD } from '../configs/api-config';
 import { useAuth } from '../configs/authContext';
 import { useNavigation } from '@react-navigation/native';
@@ -43,6 +52,14 @@ const ChangePassW = () => {
           'Your password has been changed successfully.',
           [
             {
+              text: 'Logout',
+              onPress: () => {
+                // logout(); // Đăng xuất người dùng
+                navigateToLogin(); // Chuyển hướng đến màn hình đăng nhậpư
+              
+              },
+            },
+            {
               text: 'OK',
               onPress: () => navigateToHome(),
             },
@@ -64,6 +81,13 @@ const ChangePassW = () => {
     });
   };
 
+  const navigateToLogin = () => {
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Màn Hình Đăng Nhập' }],
+    });
+  };
+
   useEffect(() => {
     if (errorMessage) {
       Alert.alert('Error', errorMessage, [{ text: 'OK', onPress: () => {} }]);
@@ -72,6 +96,24 @@ const ChangePassW = () => {
 
   return (
     <View style={styles.container}>
+      <Text style={{ fontSize: 18, fontWeight: "bold", margin: 15 }}>
+        Create new password
+      </Text>
+      <Image
+        style={{ width: 250, height: 200, alignSelf: "center" }}
+        source={require("../assets/changepassword.jpg")}
+      />
+      <Text
+        style={{
+          fontSize: 16,
+          fontWeight: "bold",
+          margin: 15,
+          textAlign: "center",
+          color: "#696969",
+        }}
+      >
+        Your New Password Must Be Differnt from Previously Used Password.
+      </Text>
       <TextInput
         style={styles.input}
         placeholder="Old Password"
@@ -93,7 +135,13 @@ const ChangePassW = () => {
         onChangeText={setConfirmPassword}
         secureTextEntry
       />
-      <Button title="Change Password" onPress={handleChangePassword} />
+      <View style={{flex:0.5}}></View>
+      <TouchableOpacity
+        onPress={handleChangePassword}
+        style={{ width: 250, backgroundColor: "#ffce01",alignItems:"center",padding:10,elevation:3,borderRadius:15 ,margin:15,}}
+      >
+        <Text style={{fontWeight:"bold"}}>Change Password</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -101,8 +149,9 @@ const ChangePassW = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor:"#FFF"
   },
   input: {
     borderWidth: 1,

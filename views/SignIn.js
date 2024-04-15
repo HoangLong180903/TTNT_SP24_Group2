@@ -84,7 +84,6 @@ export default function SignIn() {
         }}
         placeholder="Email"
         onChangeText={(txt) => {
-          // setUsername(txt);
           setEmail(txt);
         }}
       />

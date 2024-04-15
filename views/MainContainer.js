@@ -10,10 +10,12 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "./HomeScreen";
+import HomeScreen from "./HomeScreenApp";
 import QuizScreen from "./QuizScreen"
 import RankScreen from "./RankScreen";
 import InfoUserScreen from "./InfoUserScreen";
+import ResultScreen from "./ResultScreen";
+import DiemThuongScreen  from "./DiemThuongScreen";
 const Tab = createBottomTabNavigator();
 export default function Home() {
   return (
@@ -43,20 +45,30 @@ export default function Home() {
         }}
       />
       <Tab.Screen
-        name="Rank & Điểm Thưởng"
-        component={RankScreen}
+        name="Reward Gift"
+        component={DiemThuongScreen}
         options={{
-          tabBarLabel: 'Rank',
+          tabBarLabel: 'Reward',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="wallet-giftcard" color={color} size={26} />
+            <MaterialCommunityIcons name="gift-open-outline" color={color} size={26} />
           ),
         }}
       />
       <Tab.Screen
-        name="Thông Tin Cá Nhân"
+        name="Rank"
+        component={RankScreen}
+        options={{
+          tabBarLabel: 'Rank',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="medal-outline" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Info User"
         component={InfoUserScreen}
         options={{
-          tabBarLabel: 'Me',
+          tabBarLabel: 'User',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="account-circle-outline" color={color} size={26} />
           ),
