@@ -40,7 +40,8 @@ import {
 } from "react-native-paper";
 import { ClusterProvider } from "./src/components/cluster/cluster-data-access";
 const queryClient = new QueryClient();
-
+import QuaCuaToi from "./views/QuaCuaToi";
+import HelpScreen from "./views/HelpScreen";
 
 export default function App() {
   const colorScheme = useColorScheme();
@@ -92,7 +93,12 @@ export default function App() {
                   <Stack.Screen name="HomeWall" component={HomeScreen} />
                   <Stack.Screen name="HomeNavigator" component={HomeNavigator} />
                   <Stack.Screen name="AppNavigator" component={AppNavigator} />
-                  <Stack.Screen name="SettingScreen" component={SettingsScreen} />
+
+                  {/* <Stack.Screen name="SettingScreen" component={SettingsScreen} /> */}
+                  <Stack.Screen name="Settings" component={SettingsScreen} />
+                  {/* <Stack.Screen name="WalletScreen" component={WalletScreen} /> */}
+                  <Stack.Screen name="QuaCuaToi" component={QuaCuaToi}/>
+                  <Stack.Screen name="Help" component={HelpScreen}/>
 
                 </Stack.Navigator>
                 </PaperProvider>

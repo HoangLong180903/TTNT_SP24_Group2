@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  Alert,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import axios from 'axios';
 import { useAuth } from '../configs/authContext'; 
 import { API_VERIFY_PASSWORD, API_CHANGE_EMAIL } from '../configs/api-config';
@@ -77,39 +86,99 @@ const ChangeEmail = () => {
     
 
     return (
-        <View style={styles.container}>
-            {!passwordVerified && (
-                <>
-                    <Text style={styles.label}>Password:</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry={true}
-                        placeholder="Enter Password"
-                    />
-                    <Button
-                        title="Verify Password"
-                        onPress={handleVerifyPassword}
-                    />
-                </>
-            )}
-            {passwordVerified && (
-                <>
-                    <Text style={styles.label}>New Email:</Text>
-                    <TextInput
-                        style={styles.input}
-                        value={newEmail}
-                        onChangeText={setNewEmail}
-                        placeholder="Enter New Email"
-                    />
-                    <Button
-                        title="Change Email"
-                        onPress={handleChangeEmail}
-                    />
-                </>
-            )}
-        </View>
+      <View style={styles.container}>
+        {!passwordVerified && (
+          <>
+            <Text style={{ fontSize: 18, fontWeight: "bold", margin: 15 }}>
+              Verification your password
+            </Text>
+            <Image
+              style={{ width: 250, height: 200, alignSelf: "center" }}
+              source={require("../assets/verifypassword.png")}
+            />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                margin: 15,
+                textAlign: "center",
+                color: "#696969",
+              }}
+            >
+              We need to check your password to verify it is correct to
+              continue.
+            </Text>
+
+            <TextInput
+              style={styles.input}
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={true}
+              placeholder="Enter Password"
+            />
+            <View style={{ flex: 0.5 }}></View>
+            <TouchableOpacity
+              onPress={handleVerifyPassword}
+              style={{
+                width: 250,
+                backgroundColor: "#ffce01",
+                alignItems: "center",
+                padding: 10,
+                elevation: 3,
+                borderRadius: 15,
+                margin: 15,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>Verify Password</Text>
+            </TouchableOpacity>
+          </>
+        )}
+        {passwordVerified && (
+          <>
+            <Text style={{ fontSize: 20, fontWeight: "bold", margin: 15 }}>
+              Change your email
+            </Text>
+            <Image
+              style={{ width: 250, height: 200, alignSelf: "center" }}
+              source={require("../assets/changeemail.png")}
+            />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                margin: 15,
+                textAlign: "center",
+                color: "#696969",
+              }}
+            >
+              Please enter your email address change to a new email address.
+            </Text>
+
+            <TextInput
+              style={styles.input}
+              value={newEmail}
+              onChangeText={setNewEmail}
+              placeholder="Enter New Email"
+            />
+            <View style={{ flex: 0.5 }}></View>
+            <TouchableOpacity
+              onPress={handleChangeEmail}
+              style={{
+                width: 250,
+                backgroundColor: "#ffce01",
+                alignItems: "center",
+                padding: 10,
+                elevation: 3,
+                borderRadius: 15,
+                margin: 15,
+              }}
+            >
+              <Text style={{ fontWeight: "bold" }}>Save</Text>
+            </TouchableOpacity>
+            
+          </>
+        )}
+      </View>
     );
 };
 
@@ -118,20 +187,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         paddingHorizontal: 20,
+        backgroundColor:"#FFF"
     },
     label: {
         marginBottom: 5,
     },
     input: {
-        width: '100%',
+        width: '80%',
         height: 40,
         borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 5,
         paddingHorizontal: 10,
-        marginBottom: 10,
+        margin: 20,
+        
     },
 });
 

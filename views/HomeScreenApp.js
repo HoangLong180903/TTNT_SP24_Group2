@@ -4,10 +4,10 @@ import axios from "axios";
 import { useAuth } from "../configs/authContext"; 
 import { API_LIST_QUIZZ, API_TOTAL_COIN_BY_UID, API_RANK_LIST } from "../configs/api-config"; 
 import { useNavigation } from '@react-navigation/native';
-
+import { useFocusEffect } from "@react-navigation/native";
 export default function HomeScreen() {
   const [data, setData] = useState([]);
-  const [totalCoin, setTotalCoin] = useState(0); 
+  const [totalCoin, setTotalCoin] = useState(); 
   const [userRank, setUserRank] = useState(null);
   const navigation = useNavigation();
   const { user } = useAuth();
@@ -29,7 +29,16 @@ export default function HomeScreen() {
     });
   
     return unsubscribe;
-  }, [navigation, user]); 
+  }, []); 
+
+  useFocusEffect(
+    React.useCallback(() => {
+      // Fetch data mỗi khi màn hình được focus
+      fetchData();
+      fetchTotalCoin();
+      fetchRankings();
+    }, [])
+  );
 
   const fetchData = async () => {
     try {
@@ -45,6 +54,7 @@ export default function HomeScreen() {
       if (user && user._id) {
         const response = await axios.get(`${API_TOTAL_COIN_BY_UID}/${user._id}`);
         setTotalCoin(response.data.totalScore);
+        
       }
     } catch (error) {
       console.error("Error fetching total coin:", error);
@@ -73,40 +83,91 @@ export default function HomeScreen() {
   const navigateToDetail = (quizId) => { 
     navigation.navigate('GameDetail', { testId: quizId });
   };
+  const imageSource = user.avatar
+    ? { uri: user.avatar }
+    : require("../assets/404.png");
 
   return (
     <View style={styles.container}>
-      <View style={{ margin: 20, flexDirection: "row", justifyContent: "space-between" }}>
+      <View
+        style={{
+          marginLeft: 20,
+          marginRight: 20,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <View>
-          <Text style={{ fontSize: 30, fontWeight: "400" }}>Hi, {user.username}</Text>
-          <Text style={{ fontSize: 15, color: "#9F9F9F" }}>Let's make this day productive</Text>
+          <Text style={{ fontSize: 30, fontWeight: "400" }}>
+            Hi, {user.username}
+          </Text>
+          <Text style={{ fontSize: 15, color: "#9F9F9F" }}>
+            Let's make this day productive
+          </Text>
         </View>
-        <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: user.avatar }} />
+
+        {/* <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{ uri: user.avatar }} /> */}
+
+        <Image
+          source={imageSource}
+          style={{ width: 50, height: 50, borderRadius: 50,alignSelf:"center" }}
+        />
       </View>
 
       <View style={styles.cardView}>
         <View style={{ flexDirection: "row" }}>
-          <Image style={{ width: 50, height: 50, alignSelf: "center" }} source={require("../assets/cup.png")} />
+          <Image
+            style={{ width: 50, height: 50, alignSelf: "center" }}
+            source={require("../assets/cup.png")}
+          />
           <View style={{ flexDirection: "column", alignSelf: "center" }}>
-            <Text style={{ fontSize: 18, fontWeight: "600" }}>Xếp hạng</Text>
-            <Text style={{ fontSize: 16, color: "#0CA9A9", fontWeight: "bold", textAlign: "center" }}>
+            <Text style={{ fontSize: 18, fontWeight: "600" }}>Rank</Text>
+            <Text
+              style={{
+                fontSize: 16,
+                color: "#0CA9A9",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
               {userRank ? userRank : "-"}
             </Text>
           </View>
         </View>
 
         <View style={{ flexDirection: "row" }}>
-          <Image style={{ width: 50, height: 50, alignSelf: "center" }} source={require("../assets/points.png")} />
+          <Image
+            style={{ width: 50, height: 50, alignSelf: "center" }}
+            source={require("../assets/points.png")}
+          />
           <View style={{ flexDirection: "column", alignSelf: "center" }}>
-            <Text style={{ fontSize: 18, fontWeight: "600" }}>Điểm thưởng</Text>
-            <Text style={{ fontSize: 16, color: "#0CA9A9", fontWeight: "bold", textAlign: "center" }}>
-              {totalCoin} 
+            <Text style={{ fontSize: 18, fontWeight: "600" }}>Points</Text>
+            <Text
+              style={{
+                fontSize: 16,
+                color: "#0CA9A9",
+                fontWeight: "bold",
+                textAlign: "center",
+              }}
+            >
+              {totalCoin}
             </Text>
           </View>
         </View>
       </View>
 
-      <Text style={{ fontSize: 25, fontWeight: "bold", margin: 20, fontFamily: "" }}>Let's play</Text>
+      <Text
+        style={{
+          fontSize: 25,
+          fontWeight: "bold",
+          marginLeft: 20,
+          marginBottom: 10,
+          fontFamily: "",
+        }}
+      >
+        Let's play
+      </Text>
       <FlatList
         data={data}
         renderItem={renderItem}
@@ -151,8 +212,9 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 150,
+    height:150,
     borderRadius: 10,
+   
   },
   textTitle: {
     textAlign: "left",
